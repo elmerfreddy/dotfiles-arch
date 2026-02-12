@@ -136,6 +136,7 @@ apply_stow() {
         btop
         bat
         thunar
+        dunst
     )
 
     for module in "${modules[@]}"; do
