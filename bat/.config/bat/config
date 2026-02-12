@@ -1,0 +1,17 @@
+# ============================================
+# bat - Configuracion
+# ============================================
+
+# Tema
+--theme="gruvbox-dark"
+
+# Estilo de salida
+--style="numbers,changes,header"
+
+# Usar menos como pager
+--pager="less -FR"
+
+# Mapeo de extensiones
+--map-syntax "*.conf:INI"
+--map-syntax ".gitignore:Git Ignore"
+--map-syntax "*.toml:TOML"
