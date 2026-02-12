@@ -1,0 +1,90 @@
+# ============================================
+# Zsh - Aliases personalizados
+# ============================================
+
+# --- Navegacion ---
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias ~="cd ~"
+
+# --- ls mejorado ---
+alias ls="ls --color=auto"
+alias ll="ls -lah --color=auto"
+alias la="ls -a --color=auto"
+alias l="ls -CF --color=auto"
+
+# --- Seguridad ---
+alias rm="rm -i"
+alias cp="cp -i"
+alias mv="mv -i"
+
+# --- bat (cat mejorado) ---
+alias cat="bat --paging=never"
+alias catp="bat --plain"
+
+# --- grep con color ---
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
+
+# --- Git shortcuts ---
+alias g="git"
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit"
+alias gp="git push"
+alias gl="git log --oneline --graph --decorate"
+alias gd="git diff"
+alias gb="git branch"
+alias gco="git checkout"
+alias gpl="git pull"
+alias lg="lazygit"
+
+# --- Docker ---
+alias d="docker"
+alias dc="docker compose"
+alias dps="docker ps"
+alias dpsa="docker ps -a"
+alias di="docker images"
+alias dex="docker exec -it"
+alias dlog="docker logs -f"
+alias dprune="docker system prune -af"
+
+# --- Neovim ---
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
+
+# --- Sistema ---
+alias df="df -h"
+alias du="du -h"
+alias free="free -h"
+alias top="btop"
+alias ports="ss -tulanp"
+
+# --- Pacman / yay ---
+alias pac="sudo pacman"
+alias pacs="sudo pacman -S"
+alias pacr="sudo pacman -Rns"
+alias pacu="sudo pacman -Syu"
+alias paci="pacman -Qi"
+alias pacl="pacman -Ql"
+alias yays="yay -S"
+alias yayu="yay -Syu"
+
+# --- Qtile ---
+alias qlog="cat ~/.local/share/qtile/qtile.log"
+alias qrestart="qtile cmd-obj -o cmd -f reload_config"
+
+# --- Utilidades ---
+alias cls="clear"
+alias reload="source ~/.zshrc"
+alias myip="curl -s https://ifconfig.me"
+alias weather="curl -s wttr.in"
+
+# --- fzf helpers ---
+# Buscar archivo y abrir con nvim
+alias vf='nvim $(fzf)'
+# Buscar en historial
+alias fh='history | fzf'
