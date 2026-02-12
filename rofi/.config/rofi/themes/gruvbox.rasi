@@ -1,0 +1,117 @@
+/* ============================================
+ * Rofi - Tema Gruvbox
+ * ============================================ */
+
+* {
+    bg:          #282828;
+    bg-alt:      #3c3836;
+    bg-selected: #504945;
+    fg:          #ebdbb2;
+    fg-alt:      #a89984;
+    blue:        #83a598;
+    red:         #fb4934;
+    green:       #b8bb26;
+    yellow:      #fabd2f;
+    orange:      #fe8019;
+
+    border:   0;
+    margin:   0;
+    padding:  0;
+    spacing:  0;
+}
+
+window {
+    width:            600px;
+    background-color: @bg;
+    border:           2px;
+    border-color:     @blue;
+    border-radius:    8px;
+    padding:          0;
+}
+
+mainbox {
+    background-color: @bg;
+    children:         [ inputbar, listview, mode-switcher ];
+}
+
+inputbar {
+    background-color: @bg;
+    children:         [ prompt, entry ];
+    padding:          12px;
+    spacing:          8px;
+}
+
+prompt {
+    background-color: @blue;
+    padding:          6px 12px;
+    text-color:       @bg;
+    border-radius:    4px;
+    font:             "JetBrainsMono Nerd Font Bold 11";
+}
+
+entry {
+    background-color: @bg;
+    padding:          6px;
+    text-color:       @fg;
+    placeholder:      "Buscar...";
+    placeholder-color: @fg-alt;
+}
+
+listview {
+    background-color: @bg;
+    columns:          1;
+    lines:            8;
+    padding:          4px 0;
+    fixed-height:     true;
+    scrollbar:        false;
+}
+
+element {
+    background-color: @bg;
+    padding:          8px 16px;
+    text-color:       @fg;
+    spacing:          8px;
+}
+
+element-icon {
+    size:             24px;
+    background-color: transparent;
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+    vertical-align:   0.5;
+}
+
+element selected {
+    background-color: @bg-selected;
+    text-color:       @yellow;
+    border-radius:    4px;
+}
+
+element active {
+    text-color: @green;
+}
+
+element urgent {
+    text-color: @red;
+}
+
+mode-switcher {
+    background-color: @bg-alt;
+    padding:          8px;
+    spacing:          4px;
+}
+
+button {
+    background-color: @bg-alt;
+    text-color:       @fg-alt;
+    padding:          6px 12px;
+    border-radius:    4px;
+}
+
+button selected {
+    background-color: @blue;
+    text-color:       @bg;
+}
