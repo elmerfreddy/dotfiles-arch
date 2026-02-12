@@ -1,0 +1,93 @@
+# ==========================
+# Dotfiles - Lista de paquetes
+# Arch Linux (pacman + AUR via yay)
+# ==========================
+
+# --- Window Manager ---
+qtile
+python-psutil
+python-iwlib
+
+# --- Terminal ---
+alacritty
+
+# --- Shell ---
+zsh
+
+# --- Editor ---
+neovim
+
+# --- Compositor ---
+picom
+
+# --- Lanzador de aplicaciones ---
+rofi
+
+# --- File Manager ---
+thunar
+thunar-volman
+gvfs
+
+# --- Wallpaper ---
+feh
+
+# --- Terminal Multiplexer ---
+tmux
+
+# --- Herramientas CLI ---
+bat
+btop
+fzf
+ripgrep
+fd
+tree
+unzip
+wget
+curl
+
+# --- Git ---
+git
+lazygit
+
+# --- Docker ---
+docker
+docker-compose
+
+# --- Fuentes ---
+ttf-jetbrains-mono-nerd
+ttf-font-awesome
+noto-fonts
+noto-fonts-emoji
+
+# --- Utilidades del sistema ---
+stow
+xorg-server
+xorg-xinit
+xorg-xrandr
+xorg-xsetroot
+arandr
+lxsession
+network-manager-applet
+volumeicon
+brightnessctl
+playerctl
+scrot
+xclip
+polkit-gnome
+
+# --- Notificaciones ---
+dunst
+libnotify
+
+# --- Temas e iconos ---
+lxappearance
+arc-gtk-theme
+papirus-icon-theme
+
+# --- Audio ---
+pipewire
+pipewire-pulse
+pavucontrol
+
+# --- AUR (requiere yay) ---
+# zsh-theme-powerlevel10k (opcional, usamos oh-my-zsh theme)
