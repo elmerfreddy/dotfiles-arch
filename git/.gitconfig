@@ -1,0 +1,51 @@
+# ============================================
+# Git - Configuracion basica
+# ============================================
+# IMPORTANTE: Edita [user] con tus datos despues de instalar
+
+[user]
+    name = TU_NOMBRE
+    email = TU_EMAIL@example.com
+
+[init]
+    defaultBranch = main
+
+[core]
+    editor = nvim
+    autocrlf = input
+    pager = less -FRX
+    excludesfile = ~/.gitignore_global
+
+[color]
+    ui = auto
+
+[pull]
+    rebase = false
+
+[push]
+    default = current
+    autoSetupRemote = true
+
+[merge]
+    conflictstyle = diff3
+    tool = nvim
+
+[diff]
+    colorMoved = default
+
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    cm = commit -m
+    ca = commit --amend
+    lg = log --oneline --graph --decorate --all
+    last = log -1 HEAD
+    unstage = reset HEAD --
+    undo = reset --soft HEAD~1
+    wip = !git add -A && git commit -m 'WIP'
+    aliases = config --get-regexp alias
+
+[credential]
+    helper = store

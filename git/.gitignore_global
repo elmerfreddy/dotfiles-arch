@@ -1,0 +1,51 @@
+# ============================================
+# Git - Gitignore global
+# ============================================
+
+# --- OS ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# --- Editores ---
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+.settings/
+
+# --- Lenguajes ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+node_modules/
+.npm
+.yarn/
+*.class
+*.jar
+
+# --- Entorno ---
+.env
+.env.local
+.env.*.local
+*.local
+
+# --- Logs ---
+*.log
+npm-debug.log*
+
+# --- Build ---
+dist/
+build/
+*.egg-info/
