@@ -119,6 +119,37 @@ install_lazyvim() {
     success "Entorno preparado para LazyVim."
 }
 
+# --- Instalar y actualizar cache de fuentes ---
+install_fonts() {
+    info "Actualizando cache de fuentes..."
+    fc-cache -fv >/dev/null 2>&1
+    success "Cache de fuentes actualizada."
+
+    # Verificar que las Nerd Fonts se instalaron
+    local nerd_count
+    nerd_count=$(fc-list | grep -ci "nerd" || true)
+    if [ "$nerd_count" -gt 0 ]; then
+        success "Nerd Fonts detectadas: $nerd_count entradas en fc-list."
+    else
+        warn "No se detectaron Nerd Fonts. Verifica la instalacion de paquetes."
+    fi
+
+    # Verificar Font Awesome
+    local fa_count
+    fa_count=$(fc-list | grep -ci "awesome" || true)
+    if [ "$fa_count" -gt 0 ]; then
+        success "Font Awesome detectada: $fa_count entradas en fc-list."
+    else
+        warn "No se detecto Font Awesome. Verifica la instalacion de paquetes."
+    fi
+
+    # Listar familias Nerd Font instaladas
+    info "Familias Nerd Font disponibles:"
+    fc-list | grep -i "nerd" | awk -F: '{print $2}' | sort -u | while read -r font; do
+        echo -e "  ${GREEN}>${NC}$font"
+    done
+}
+
 # --- Aplicar dotfiles con stow ---
 apply_stow() {
     info "Aplicando dotfiles con GNU Stow..."
@@ -137,6 +168,7 @@ apply_stow() {
         bat
         thunar
         dunst
+        fontconfig
     )
 
     for module in "${modules[@]}"; do
@@ -207,6 +239,7 @@ main() {
     check_arch
     check_yay
     install_packages
+    install_fonts
     install_ohmyzsh
     install_lazyvim
     set_permissions

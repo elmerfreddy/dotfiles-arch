@@ -53,11 +53,30 @@ lazygit
 docker
 docker-compose
 
-# --- Fuentes ---
+# --- Fuentes Nerd (monospace con iconos parcheados) ---
 ttf-jetbrains-mono-nerd
+ttf-firacode-nerd
+ttf-hack-nerd
+ttf-cascadia-code-nerd
+ttf-sourcecodepro-nerd
+ttf-ubuntu-nerd
+ttf-inconsolata-nerd
+ttf-iosevka-nerd
+ttf-meslo-nerd
+ttf-roboto-mono-nerd
+ttf-droid-nerd
+
+# --- Fuentes simbolos/fallback (renderiza iconos que falten) ---
+ttf-nerd-fonts-symbols
+ttf-nerd-fonts-symbols-mono
 ttf-font-awesome
+otf-font-awesome
+
+# --- Fuentes del sistema ---
 noto-fonts
 noto-fonts-emoji
+noto-fonts-cjk
+ttf-liberation
 
 # --- Utilidades del sistema ---
 stow
