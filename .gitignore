@@ -1,0 +1,12 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Backups
+*.bak
+*.swp
+*.swo
+*~
+
+# Local overrides
+*.local
