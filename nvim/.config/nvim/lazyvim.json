@@ -1,8 +1,11 @@
 {
   "colorscheme": "gruvbox",
-  "extras": [],
+  "extras": [
+
+  ],
+  "install_version": 7,
   "news": {
-    "NEWS.md": ""
+    "NEWS.md": "11866"
   },
-  "version": 7
+  "version": 8
 }

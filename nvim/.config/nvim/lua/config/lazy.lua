@@ -34,7 +34,7 @@ require("lazy").setup({
         transparent_mode = false,
       },
     },
-    -- Importar plugins personalizados desde lua/plugins/
+    -- Plugins personalizados (lua/plugins/*.lua)
     { import = "plugins" },
   },
   defaults = {
