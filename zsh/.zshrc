@@ -29,8 +29,8 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
-export LANG="es_ES.UTF-8"
-export LC_ALL="es_ES.UTF-8"
+export LANG="es_BO.UTF-8"
+export LC_ALL="es_BO.UTF-8"
 
 # Path
 export PATH="$HOME/.local/bin:$PATH"
@@ -77,3 +77,5 @@ bindkey -v  # Modo vi
 bindkey '^R' history-incremental-search-backward
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
+
+export PATH=/home/em/.opencode/bin:$PATH
