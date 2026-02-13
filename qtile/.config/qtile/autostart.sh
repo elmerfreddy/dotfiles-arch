@@ -7,6 +7,9 @@
 # Compositor
 picom --daemon &
 
+# Luz cálida nocturna (geoclue2 detecta ubicación automáticamente)
+redshift-gtk &
+
 # Wallpaper
 feh --bg-fill --no-fehbg ~/.config/wallpapers/wallpaper.jpg 2>/dev/null || \
 feh --bg-fill --no-fehbg /usr/share/backgrounds/archlinux/simple.png 2>/dev/null &

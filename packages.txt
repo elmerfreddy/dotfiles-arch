@@ -93,6 +93,8 @@ playerctl
 scrot
 xclip
 polkit-gnome
+redshift
+geoclue2
 
 # --- Notificaciones ---
 dunst

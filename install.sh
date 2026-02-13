@@ -29,6 +29,31 @@ check_arch() {
     success "Arch Linux detectado."
 }
 
+# --- Verificar que vim NO este instalado ---
+check_vim_not_installed() {
+    info "Verificando que vim no este instalado..."
+    
+    # Verificar si vim esta instalado
+    if pacman -Qi vim &>/dev/null; then
+        warn "Se detecto vim instalado. Este entorno usa neovim exclusivamente."
+        warn "Desinstalando vim..."
+        
+        # Desinstalar vim
+        sudo pacman -Rns --noconfirm vim
+        
+        success "vim desinstalado correctamente."
+    else
+        success "vim no esta instalado (correcto)."
+    fi
+    
+    # Verificar tambien gvim (GUI version)
+    if pacman -Qi gvim &>/dev/null; then
+        warn "Se detecto gvim instalado. Desinstalandolo..."
+        sudo pacman -Rns --noconfirm gvim
+        success "gvim desinstalado correctamente."
+    fi
+}
+
 # --- Verificar/instalar yay ---
 check_yay() {
     if ! command -v yay &>/dev/null; then
@@ -61,6 +86,17 @@ install_packages() {
     if [ ${#packages[@]} -gt 0 ]; then
         yay -S --needed --noconfirm "${packages[@]}"
         success "Paquetes instalados correctamente."
+        
+        # Verificar que neovim tenga soporte Lua
+        if command -v nvim &>/dev/null; then
+            info "Verificando soporte Lua en neovim..."
+            if nvim --version | grep -q "LuaJIT"; then
+                success "Neovim instalado con soporte LuaJIT."
+            else
+                error "Neovim no tiene soporte LuaJIT. Verifica la instalacion."
+                exit 1
+            fi
+        fi
     else
         warn "No se encontraron paquetes para instalar."
     fi
@@ -169,6 +205,7 @@ apply_stow() {
         thunar
         dunst
         fontconfig
+        redshift
     )
 
     for module in "${modules[@]}"; do
@@ -217,6 +254,13 @@ enable_services() {
         sudo systemctl enable NetworkManager.service
         success "NetworkManager habilitado."
     fi
+
+    # Geoclue2 (detección de ubicación para redshift)
+    if systemctl list-unit-files | grep -q geoclue.service; then
+        sudo systemctl enable geoclue.service
+        sudo systemctl start geoclue.service
+        success "Geoclue2 habilitado."
+    fi
 }
 
 # --- Hacer ejecutable autostart de qtile ---
@@ -238,6 +282,7 @@ main() {
 
     check_arch
     check_yay
+    check_vim_not_installed
     install_packages
     install_fonts
     install_ohmyzsh
