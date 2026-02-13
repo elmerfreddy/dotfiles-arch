@@ -6,17 +6,17 @@ from libqtile.config import Group, Key
 from libqtile.lazy import lazy
 from settings.keys import keys, mod
 
-# Grupos con iconos (requiere Nerd Font)
+# Grupos con números
 groups = [
-    Group("1", label=""),    # Terminal
-    Group("2", label=""),    # Navegador
-    Group("3", label=""),    # Codigo
-    Group("4", label=""),    # Archivos
-    Group("5", label=""),    # Chat
-    Group("6", label=""),    # Musica
-    Group("7", label=""),    # Config
-    Group("8", label=""),    # Docker
-    Group("9", label=""),    # Misc
+    Group("1", label="1"),    # Terminal
+    Group("2", label="2"),    # Navegador
+    Group("3", label="3"),    # Codigo
+    Group("4", label="4"),    # Archivos
+    Group("5", label="5"),    # Chat
+    Group("6", label="6"),    # Musica
+    Group("7", label="7"),    # Config
+    Group("8", label="8"),    # Docker
+    Group("9", label="9"),    # Misc
 ]
 
 for g in groups:

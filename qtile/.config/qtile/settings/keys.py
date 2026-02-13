@@ -44,7 +44,8 @@ keys = [
     Key([mod], "d", lazy.spawn("rofi -show drun"), desc="Rofi launcher"),
     Key([mod], "r", lazy.spawn("rofi -show run"), desc="Rofi run"),
     Key([mod], "e", lazy.spawn("thunar"), desc="File manager"),
-    Key([mod], "b", lazy.spawn("firefox"), desc="Navegador web"),
+    Key([mod], "b", lazy.spawn("brave"), desc="Navegador web"),
+    Key([mod], "p", lazy.spawn("arandr"), desc="Configuracion de pantallas"),
 
     # ---- Screenshots ----
     Key([], "Print", lazy.spawn("scrot '%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/Pictures/'"), desc="Screenshot completo"),

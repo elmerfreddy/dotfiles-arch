@@ -7,7 +7,7 @@ from settings.theme import colors
 
 # Fuente por defecto
 widget_defaults = dict(
-    font="JetBrainsMono Nerd Font",
+    font="JetBrainsMono NF",
     fontsize=13,
     padding=3,
     foreground=colors["fg"],
@@ -36,8 +36,7 @@ def primary_widgets():
         spacer(6),
 
         # Logo / Layout actual
-        widget.CurrentLayoutIcon(
-            scale=0.65,
+        widget.CurrentLayout(
             foreground=colors["fg"],
             background=colors["bg"],
         ),
@@ -53,7 +52,7 @@ def primary_widgets():
             padding_x=3,
             borderwidth=3,
             active=colors["fg"],
-            inactive=colors["bg4"],
+            inactive=colors["fg4"],
             rounded=False,
             highlight_color=colors["bg1"],
             highlight_method="line",
@@ -121,9 +120,8 @@ def primary_widgets():
             fontsize=15,
             foreground=colors["purple_bright"],
         ),
-        widget.PulseVolume(
+        widget.Volume(
             foreground=colors["purple_bright"],
-            limit_max_volume=True,
             step=5,
         ),
 
