@@ -42,9 +42,7 @@ HISTFILE=~/.zsh_history
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_NO_DUPS
-setopt SHARE_HISTORY
-setopt APPEND_HISTORY
-setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY  # Comparte historial entre sesiones (implica INC_APPEND)
 
 # --- Opciones de Zsh ---
 setopt AUTO_CD
@@ -82,3 +80,8 @@ bindkey '^[^?' backward-kill-word     # Alt+Backspace (secuencia más común)
 bindkey '^[^H' backward-kill-word     # Alt+Backspace (variante)
 
 export PATH="$HOME/.opencode/bin:$PATH"
+
+# Java — Android Studio
+export JAVA_HOME="/usr/lib/jvm/java-17-openjdk"
+export PATH="$JAVA_HOME/bin:$PATH"
+

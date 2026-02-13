@@ -121,5 +121,8 @@ betterlockscreen  # AUR
 # --- Navegador ---
 brave-bin
 
+# --- Java (Android Studio) ---
+jdk17-openjdk
+
 # --- AUR (requiere yay) ---
 # zsh-theme-powerlevel10k (opcional, usamos oh-my-zsh theme)

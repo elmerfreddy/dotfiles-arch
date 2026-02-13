@@ -23,6 +23,7 @@ Dotfiles personales para Arch Linux con Qtile como window manager, gestionados c
 | **Betterlockscreen** | Bloqueo de pantalla con wallpaper |
 | **Viewnior** | Visor de imagenes ligero |
 | **Docker** | Aliases via plugin de Oh My Zsh |
+| **Java 17** | JDK para desarrollo Android (Android Studio) |
 
 **Tema:** Gruvbox (consistente en todos los componentes)
 
