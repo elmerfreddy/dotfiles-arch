@@ -206,6 +206,7 @@ apply_stow() {
         dunst
         fontconfig
         redshift
+        wallpapers
     )
 
     for module in "${modules[@]}"; do
@@ -253,13 +254,6 @@ enable_services() {
     if systemctl list-unit-files | grep -q NetworkManager.service; then
         sudo systemctl enable NetworkManager.service
         success "NetworkManager habilitado."
-    fi
-
-    # Geoclue2 (detección de ubicación para redshift)
-    if systemctl list-unit-files | grep -q geoclue.service; then
-        sudo systemctl enable geoclue.service
-        sudo systemctl start geoclue.service
-        success "Geoclue2 habilitado."
     fi
 }
 

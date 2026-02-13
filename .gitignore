@@ -10,3 +10,7 @@ Thumbs.db
 
 # Local overrides
 *.local
+
+# Python
+__pycache__/
+*.pyc

@@ -48,4 +48,4 @@
     aliases = config --get-regexp alias
 
 [credential]
-    helper = store
+    helper = cache

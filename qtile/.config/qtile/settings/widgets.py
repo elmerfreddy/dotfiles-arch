@@ -7,7 +7,7 @@ from settings.theme import colors
 
 # Fuente por defecto
 widget_defaults = dict(
-    font="JetBrainsMono NF",
+    font="JetBrainsMono Nerd Font",
     fontsize=13,
     padding=3,
     foreground=colors["fg"],

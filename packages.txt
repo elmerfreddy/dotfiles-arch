@@ -86,7 +86,6 @@ xorg-xinit
 xorg-xrandr
 xorg-xsetroot
 arandr
-lxsession
 network-manager-applet
 volumeicon
 brightnessctl
@@ -95,7 +94,6 @@ scrot
 xclip
 polkit-gnome
 redshift
-geoclue2
 
 # --- Notificaciones ---
 dunst
@@ -110,6 +108,9 @@ papirus-icon-theme
 pipewire
 pipewire-pulse
 pavucontrol
+
+# --- Navegador ---
+brave-bin
 
 # --- AUR (requiere yay) ---
 # zsh-theme-powerlevel10k (opcional, usamos oh-my-zsh theme)

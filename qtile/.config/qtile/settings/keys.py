@@ -56,6 +56,11 @@ keys = [
     Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"), desc="Bajar volumen"),
     Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle"), desc="Mute"),
 
+    # ---- Reproduccion multimedia ----
+    Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Play/Pause"),
+    Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Siguiente pista"),
+    Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Pista anterior"),
+
     # ---- Brillo ----
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +10%"), desc="Subir brillo"),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-"), desc="Bajar brillo"),

@@ -7,7 +7,7 @@
 # Compositor
 picom --daemon &
 
-# Luz cálida nocturna (geoclue2 detecta ubicación automáticamente)
+# Luz cálida nocturna (ubicación manual en redshift.conf)
 redshift-gtk &
 
 # Wallpaper

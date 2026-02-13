@@ -28,7 +28,7 @@ source "$ZSH/oh-my-zsh.sh"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export TERMINAL="alacritty"
-export BROWSER="firefox"
+export BROWSER="brave"
 export LANG="es_BO.UTF-8"
 export LC_ALL="es_BO.UTF-8"
 
@@ -77,5 +77,8 @@ bindkey -v  # Modo vi
 bindkey '^R' history-incremental-search-backward
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
+bindkey '^W' backward-kill-word       # Ctrl+W: borrar palabra anterior
+bindkey '^[^?' backward-kill-word     # Alt+Backspace (secuencia más común)
+bindkey '^[^H' backward-kill-word     # Alt+Backspace (variante)
 
-export PATH=/home/em/.opencode/bin:$PATH
+export PATH="$HOME/.opencode/bin:$PATH"
