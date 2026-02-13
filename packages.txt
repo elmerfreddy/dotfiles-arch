@@ -109,6 +109,10 @@ pipewire
 pipewire-pulse
 pavucontrol
 
+# --- Bloqueo de pantalla ---
+betterlockscreen
+xss-lock
+
 # --- Navegador ---
 brave-bin
 

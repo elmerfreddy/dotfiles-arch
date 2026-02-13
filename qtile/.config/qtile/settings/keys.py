@@ -47,6 +47,9 @@ keys = [
     Key([mod], "b", lazy.spawn("brave"), desc="Navegador web"),
     Key([mod], "p", lazy.spawn("arandr"), desc="Configuracion de pantallas"),
 
+    # ---- Bloqueo de pantalla ----
+    Key([mod, "shift"], "x", lazy.spawn("betterlockscreen -l"), desc="Bloquear pantalla"),
+
     # ---- Screenshots ----
     Key([], "Print", lazy.spawn("scrot '%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/Pictures/'"), desc="Screenshot completo"),
     Key([mod], "Print", lazy.spawn("scrot -s '%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/Pictures/'"), desc="Screenshot seleccion"),

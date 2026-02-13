@@ -20,6 +20,7 @@ Dotfiles personales para Arch Linux con Qtile como window manager, gestionados c
 | **Thunar** | Administrador de archivos |
 | **Redshift** | Filtro de luz azul nocturna |
 | **Fontconfig** | Configuracion de renderizado de fuentes |
+| **Betterlockscreen** | Bloqueo de pantalla con wallpaper |
 | **Docker** | Aliases via plugin de Oh My Zsh |
 
 **Tema:** Gruvbox (consistente en todos los componentes)
@@ -53,9 +54,10 @@ chmod +x install.sh
 7. Prepara el entorno para LazyVim (respaldando configuracion previa de nvim)
 8. Configura permisos de ejecucion en scripts
 9. Aplica todos los dotfiles con GNU Stow (symlinks a `$HOME`)
-10. Cambia el shell predeterminado a Zsh
-11. Habilita servicios del sistema: Docker, NetworkManager
-12. Agrega al usuario al grupo `docker`
+10. Cachea el wallpaper para betterlockscreen
+11. Cambia el shell predeterminado a Zsh
+12. Habilita servicios del sistema: Docker, NetworkManager
+13. Agrega al usuario al grupo `docker`
 
 ### Post-instalacion
 
@@ -65,7 +67,7 @@ Despues de ejecutar `install.sh`:
 2. Selecciona **Qtile** como window manager en tu display manager
 3. Abre Neovim (`nvim`) para que LazyVim instale plugins automaticamente
 4. Edita `~/.gitconfig` con tu nombre y email
-5. Coloca tu wallpaper en `~/.config/wallpapers/wallpaper.jpg`
+5. Se incluyen wallpapers de ejemplo en `~/.config/wallpapers/` (`wallpaper.jpg` se usa por defecto)
 6. Usa `lxappearance` para seleccionar el tema GTK (arc-gtk-theme + papirus-icon-theme)
 
 ## Uso manual con Stow
@@ -151,6 +153,7 @@ stow -D alacritty
 | `Super + e` | Thunar (file manager) |
 | `Super + b` | Brave (navegador) |
 | `Super + p` | Arandr (configuracion de pantallas) |
+| `Super + Shift + x` | Bloquear pantalla |
 
 ### Screenshots
 

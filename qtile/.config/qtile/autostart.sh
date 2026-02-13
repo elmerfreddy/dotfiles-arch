@@ -24,5 +24,8 @@ volumeicon &
 # Notificaciones
 dunst &
 
+# Bloqueo de pantalla automatico por inactividad
+xss-lock -- betterlockscreen -l &
+
 # Configurar cursor
 xsetroot -cursor_name left_ptr &

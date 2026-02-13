@@ -257,6 +257,23 @@ enable_services() {
     fi
 }
 
+# --- Configurar betterlockscreen ---
+setup_lockscreen() {
+    if command -v betterlockscreen &>/dev/null; then
+        local wallpaper_dir="$HOME/.config/wallpapers"
+        local wallpaper="$wallpaper_dir/wallpaper.jpg"
+        if [ -f "$wallpaper" ]; then
+            info "Cacheando imagen para betterlockscreen..."
+            betterlockscreen -u "$wallpaper" 2>/dev/null
+            success "Lockscreen configurado con wallpaper.jpg."
+        else
+            warn "No se encontro wallpaper en $wallpaper_dir. Ejecuta 'betterlockscreen -u <imagen>' manualmente."
+        fi
+    else
+        warn "betterlockscreen no encontrado. Instala el paquete para bloqueo de pantalla."
+    fi
+}
+
 # --- Hacer ejecutable autostart de qtile ---
 set_permissions() {
     info "Configurando permisos..."
@@ -283,6 +300,7 @@ main() {
     install_lazyvim
     set_permissions
     apply_stow
+    setup_lockscreen
     set_zsh_shell
     enable_services
 
