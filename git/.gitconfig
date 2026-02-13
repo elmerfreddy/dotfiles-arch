@@ -4,8 +4,8 @@
 # IMPORTANTE: Edita [user] con tus datos despues de instalar
 
 [user]
-    name = TU_NOMBRE
-    email = TU_EMAIL@example.com
+    name = Elmer Mendoza
+    email = defreddyelmer@gmail.com
 
 [init]
     defaultBranch = main
