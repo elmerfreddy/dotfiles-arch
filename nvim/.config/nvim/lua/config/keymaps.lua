@@ -5,11 +5,10 @@
 
 local map = vim.keymap.set
 
--- Mejor movimiento entre splits
-map("n", "<C-h>", "<C-w>h", { desc = "Ir al split izquierdo" })
-map("n", "<C-j>", "<C-w>j", { desc = "Ir al split inferior" })
-map("n", "<C-k>", "<C-w>k", { desc = "Ir al split superior" })
-map("n", "<C-l>", "<C-w>l", { desc = "Ir al split derecho" })
+-- Los keymaps de C-h/j/k/l para vim-tmux-navigator se definen
+-- en lua/plugins/tmux.lua con lazy keys (sobreescriben los de LazyVim)
+
+
 
 -- Redimensionar splits con flechas
 map("n", "<C-Up>", ":resize +2<CR>", { desc = "Agrandar split horizontal" })
