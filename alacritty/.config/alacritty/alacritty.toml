@@ -3,6 +3,7 @@
 # ============================================
 
 # --- General ---
+[general]
 live_config_reload = true
 
 # --- Window ---
@@ -133,3 +134,4 @@ action = "DecreaseFontSize"
 key = "Key0"
 mods = "Control"
 action = "ResetFontSize"
+
