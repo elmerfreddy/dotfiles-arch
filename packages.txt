@@ -30,6 +30,9 @@ gvfs
 tumbler
 ffmpegthumbnailer
 
+# --- Visor de imagenes ---
+viewnior
+
 # --- Wallpaper ---
 feh
 

@@ -21,6 +21,7 @@ Dotfiles personales para Arch Linux con Qtile como window manager, gestionados c
 | **Redshift** | Filtro de luz azul nocturna |
 | **Fontconfig** | Configuracion de renderizado de fuentes |
 | **Betterlockscreen** | Bloqueo de pantalla con wallpaper |
+| **Viewnior** | Visor de imagenes ligero |
 | **Docker** | Aliases via plugin de Oh My Zsh |
 
 **Tema:** Gruvbox (consistente en todos los componentes)
