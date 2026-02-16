@@ -231,3 +231,63 @@ dotfiles/
     ├── .zshrc
     └── .zsh_aliases
 ```
+
+## Troubleshooting
+
+### Los wallpapers no se muestran
+
+**Problema**: Después de ejecutar `stow wallpapers`, no aparecen los wallpapers en `~/.config/wallpapers/`
+
+**Solución**: Stow requiere que el directorio padre (`~/.config/`) exista antes de crear los symlinks.
+
+```bash
+# Crear el directorio manualmente
+mkdir -p ~/.config
+
+# Luego aplicar stow
+cd ~/dotfiles
+stow wallpapers
+
+# Verificar que funcionó
+ls -la ~/.config/wallpapers/
+
+# Si aún no funciona, crear symlink manual
+ln -s ~/dotfiles/wallpapers/.config/wallpapers ~/.config/wallpapers
+```
+
+**Nota**: El script `install.sh` ya ha sido corregido para crear estos directorios automáticamente, así que este problema no ocurrirá en instalaciones nuevas.
+
+### Stow falla con otros módulos
+
+Si encuentras el mismo problema con otros módulos (nvim, qtile, etc.):
+
+```bash
+# Crear todos los directorios necesarios
+mkdir -p ~/.config ~/.local/share
+
+# Luego aplicar stow
+cd ~/dotfiles
+stow <modulo_name>
+```
+
+### El fondo de pantalla no persiste después de reiniciar
+
+Asegúrate de que:
+
+1. El symlink de wallpapers está correctamente creado:
+   ```bash
+   ls -la ~/.config/wallpapers/
+   ```
+
+2. El script `autostart.sh` está en su lugar:
+   ```bash
+   ls -la ~/.config/qtile/autostart.sh
+   ```
+
+3. Reinicia Qtile: `Super + Shift + r`
+
+4. Si deseas cambiar el wallpaper permanentemente, edita:
+   ```bash
+   nvim ~/.config/qtile/autostart.sh
+   # Cambia wallpaper.jpg por el nombre de la imagen deseada
+   ```
