@@ -51,13 +51,19 @@ keys = [
     Key([mod, "shift"], "x", lazy.spawn("betterlockscreen -l"), desc="Bloquear pantalla"),
 
     # ---- Screenshots ----
-    Key([], "Print", lazy.spawn("scrot '%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/Pictures/'"), desc="Screenshot completo"),
-    Key([mod], "Print", lazy.spawn("scrot -s '%Y-%m-%d_%H-%M-%S.png' -e 'mv $f ~/Pictures/'"), desc="Screenshot seleccion"),
+    Key([], "Print", lazy.spawn("flameshot full -p ~/Pictures/"), desc="Screenshot completo"),
+    Key([mod, "shift"], "s", lazy.spawn("flameshot gui"), desc="Screenshot con seleccion (como Win+Shift+S)"),
 
     # ---- Audio ----
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"), desc="Subir volumen"),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"), desc="Bajar volumen"),
-    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle"), desc="Mute"),
+    Key([], "XF86AudioRaiseVolume",
+        lazy.spawn("sh -c 'pactl set-sink-volume @DEFAULT_SINK@ +5% && VOL=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP \"\\d+%\" | head -1 | tr -d \"%\") && dunstify -h int:value:$VOL -h string:x-dunst-stack-tag:volume \"  Volumen\" \"${VOL}%\"'"),
+        desc="Subir volumen"),
+    Key([], "XF86AudioLowerVolume",
+        lazy.spawn("sh -c 'pactl set-sink-volume @DEFAULT_SINK@ -5% && VOL=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP \"\\d+%\" | head -1 | tr -d \"%\") && dunstify -h int:value:$VOL -h string:x-dunst-stack-tag:volume \"  Volumen\" \"${VOL}%\"'"),
+        desc="Bajar volumen"),
+    Key([], "XF86AudioMute",
+        lazy.spawn("sh -c 'pactl set-sink-mute @DEFAULT_SINK@ toggle && MUTED=$(pactl get-sink-mute @DEFAULT_SINK@ | grep -oP \"yes|no\") && dunstify -h string:x-dunst-stack-tag:volume \"  Volumen\" \"$([ $MUTED = yes ] && echo Silenciado || echo Activo)\"'"),
+        desc="Mute"),
 
     # ---- Reproduccion multimedia ----
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Play/Pause"),
