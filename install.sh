@@ -186,6 +186,17 @@ install_fonts() {
     done
 }
 
+# --- Crear directorios necesarios para stow ---
+create_stow_dirs() {
+    info "Creando directorios necesarios para stow..."
+    
+    # Directorios necesarios para los módulos
+    mkdir -p "$HOME/.config"
+    mkdir -p "$HOME/.local/share"
+    
+    success "Directorios creados."
+}
+
 # --- Aplicar dotfiles con stow ---
 apply_stow() {
     info "Aplicando dotfiles con GNU Stow..."
@@ -299,6 +310,7 @@ main() {
     install_ohmyzsh
     install_lazyvim
     set_permissions
+    create_stow_dirs
     apply_stow
     setup_lockscreen
     set_zsh_shell
