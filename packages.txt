@@ -118,6 +118,9 @@ pavucontrol
 xss-lock
 betterlockscreen  # AUR
 
+# --- Accesorios ---
+galculator
+
 # --- Navegador ---
 brave-bin
 
