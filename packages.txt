@@ -93,7 +93,6 @@ xorg-xrandr
 xorg-xsetroot
 arandr
 network-manager-applet
-volumeicon
 brightnessctl
 playerctl
 flameshot
