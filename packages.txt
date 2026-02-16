@@ -54,6 +54,7 @@ less
 # --- Git ---
 git
 lazygit
+gitg
 
 # --- Docker ---
 docker
