@@ -85,3 +85,5 @@ export PATH="$HOME/.opencode/bin:$PATH"
 export JAVA_HOME="/usr/lib/jvm/java-17-openjdk"
 export PATH="$JAVA_HOME/bin:$PATH"
 
+
+eval "$(/home/em/.local/bin/mise activate zsh)" # added by https://mise.run/zsh
