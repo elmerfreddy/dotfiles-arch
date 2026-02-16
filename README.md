@@ -4,70 +4,71 @@ Dotfiles personales para Arch Linux con Qtile como window manager, gestionados c
 
 ## Componentes
 
-| Componente | Descripcion |
+| Componente | Descripción |
 |-----------|-------------|
 | **Qtile** | Window manager (tiling) con barra integrada |
 | **Alacritty** | Terminal emulador GPU-accelerated |
 | **Zsh + Oh My Zsh** | Shell con plugins y autocompletado |
-| **Neovim (LazyVim)** | Editor de texto/codigo |
+| **Neovim (LazyVim)** | Editor de texto/código |
 | **Rofi** | Lanzador de aplicaciones |
 | **Picom** | Compositor (transparencias, sombras) |
 | **Tmux** | Multiplexor de terminal |
-| **Git** | Control de versiones con aliases utiles |
+| **Git** | Control de versiones con aliases útiles |
 | **Dunst** | Daemon de notificaciones de escritorio |
 | **Bat** | Reemplazo de `cat` con resaltado de sintaxis |
 | **Btop** | Monitor de recursos del sistema |
 | **Thunar** | Administrador de archivos |
 | **Redshift** | Filtro de luz azul nocturna |
-| **Fontconfig** | Configuracion de renderizado de fuentes |
+| **Fontconfig** | Configuración de renderizado de fuentes |
 | **Betterlockscreen** | Bloqueo de pantalla con wallpaper |
-| **Viewnior** | Visor de imagenes ligero |
-| **Docker** | Aliases via plugin de Oh My Zsh |
+| **Viewnior** | Visor de imágenes ligero |
+| **Docker** | Aliases vía plugin de Oh My Zsh |
 | **Java 17** | JDK para desarrollo Android (Android Studio) |
+| **Galculator** | Calculadora de escritorio GTK |
 
 **Tema:** Gruvbox (consistente en todos los componentes)
 
 ## Requisitos
 
 - Arch Linux (o derivado)
-- [yay](https://github.com/Jguer/yay) (AUR helper, se instala automaticamente si no existe)
+- [yay](https://github.com/Jguer/yay) (AUR helper, se instala automáticamente si no existe)
 - Git
 
-## Instalacion
+## Instalación
 
 ```bash
 # 1. Clonar el repositorio
 git clone https://github.com/elmerfreddy/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
-# 2. Ejecutar el script de instalacion
+# 2. Ejecutar el script de instalación
 chmod +x install.sh
 ./install.sh
 ```
 
-### Que hace `install.sh`
+### Qué hace `install.sh`
 
 1. Verifica que el sistema sea Arch Linux
-2. Instala `yay` (AUR helper) si no esta presente
-3. **Desinstala vim/gvim** si estan presentes (este entorno usa neovim exclusivamente)
-4. Instala todos los paquetes desde `packages.txt` via `yay`
-5. Actualiza cache de fuentes y verifica Nerd Fonts
+2. Instala `yay` (AUR helper) si no está presente
+3. **Desinstala vim/gvim** si están presentes (este entorno usa neovim exclusivamente)
+4. Instala todos los paquetes desde `packages.txt` vía `yay`
+5. Actualiza caché de fuentes y verifica Nerd Fonts
 6. Instala Oh My Zsh y plugins externos (autosuggestions, syntax-highlighting)
-7. Prepara el entorno para LazyVim (respaldando configuracion previa de nvim)
-8. Configura permisos de ejecucion en scripts
+7. Prepara el entorno para LazyVim (respaldando configuración previa de nvim)
+8. Configura permisos de ejecución en scripts
 9. Aplica todos los dotfiles con GNU Stow (symlinks a `$HOME`)
-10. Cachea el wallpaper para betterlockscreen
+10. Caché el wallpaper para betterlockscreen
 11. Cambia el shell predeterminado a Zsh
 12. Habilita servicios del sistema: Docker, NetworkManager
 13. Agrega al usuario al grupo `docker`
 
-### Post-instalacion
+### Post-instalación
 
-Despues de ejecutar `install.sh`:
+Después de ejecutar `install.sh`:
 
-1. Cierra sesion y vuelve a iniciar
+1. Cierra sesión y vuelve a iniciar
 2. Selecciona **Qtile** como window manager en tu display manager
-3. Abre Neovim (`nvim`) para que LazyVim instale plugins automaticamente
+3. Abre Neovim (`nvim`) para que LazyVim instale plugins automáticamente
 4. Edita `~/.gitconfig` con tu nombre y email
 5. Se incluyen wallpapers de ejemplo en `~/.config/wallpapers/` (`wallpaper.jpg` se usa por defecto)
 6. Usa `lxappearance` para seleccionar el tema GTK (arc-gtk-theme + papirus-icon-theme)
@@ -79,7 +80,7 @@ Si prefieres aplicar los dotfiles manualmente:
 ```bash
 cd ~/dotfiles
 
-# Aplicar un modulo especifico
+# Aplicar un módulo específico
 stow alacritty
 stow qtile
 stow zsh
@@ -96,40 +97,40 @@ stow fontconfig
 stow redshift
 stow wallpapers
 
-# Aplicar todos los modulos
+# Aplicar todos los módulos
 stow */
 
-# Eliminar symlinks de un modulo
+# Eliminar symlinks de un módulo
 stow -D alacritty
 ```
 
 ## Keybindings de Qtile
 
-### Navegacion
+### Navegación
 
-| Atajo | Accion |
+| Atajo | Acción |
 |-------|--------|
 | `Super + h/j/k/l` | Navegar entre ventanas (vim-style) |
 | `Super + n` | Siguiente ventana |
 
 ### Mover ventanas
 
-| Atajo | Accion |
+| Atajo | Acción |
 |-------|--------|
 | `Super + Shift + h/l` | Mover ventana izquierda/derecha |
 | `Super + Shift + j/k` | Mover ventana abajo/arriba |
 
 ### Redimensionar ventanas
 
-| Atajo | Accion |
+| Atajo | Acción |
 |-------|--------|
 | `Super + Control + h/l` | Crecer ventana izquierda/derecha |
 | `Super + Control + j/k` | Crecer ventana abajo/arriba |
-| `Super + Shift + n` | Normalizar tamanos |
+| `Super + Shift + n` | Normalizar tamaños |
 
 ### Ventanas y layout
 
-| Atajo | Accion |
+| Atajo | Acción |
 |-------|--------|
 | `Super + q` | Cerrar ventana |
 | `Super + f` | Toggle fullscreen |
@@ -140,33 +141,33 @@ stow -D alacritty
 
 ### Workspaces
 
-| Atajo | Accion |
+| Atajo | Acción |
 |-------|--------|
 | `Super + [1-9]` | Cambiar workspace |
 | `Super + Shift + [1-9]` | Mover ventana a workspace |
 
 ### Aplicaciones
 
-| Atajo | Accion |
+| Atajo | Acción |
 |-------|--------|
 | `Super + Enter` | Abrir Alacritty |
 | `Super + d` | Rofi (lanzador de aplicaciones) |
 | `Super + r` | Rofi (ejecutar comando) |
 | `Super + e` | Thunar (file manager) |
 | `Super + b` | Brave (navegador) |
-| `Super + p` | Arandr (configuracion de pantallas) |
+| `Super + p` | Arandr (configuración de pantallas) |
 | `Super + Shift + x` | Bloquear pantalla |
 
 ### Screenshots
 
-| Atajo | Accion |
+| Atajo | Acción |
 |-------|--------|
 | `Print` | Screenshot completo |
-| `Super + Print` | Screenshot por seleccion |
+| `Super + Print` | Screenshot por selección |
 
 ### Hardware
 
-| Atajo | Accion |
+| Atajo | Acción |
 |-------|--------|
 | `XF86AudioRaiseVolume` | Subir volumen |
 | `XF86AudioLowerVolume` | Bajar volumen |
@@ -179,9 +180,9 @@ stow -D alacritty
 
 ### Qtile
 
-| Atajo | Accion |
+| Atajo | Acción |
 |-------|--------|
-| `Super + Shift + r` | Recargar configuracion |
+| `Super + Shift + r` | Recargar configuración |
 | `Super + Shift + q` | Cerrar Qtile (logout) |
 
 ## Estructura
