@@ -9,13 +9,16 @@ from settings.widgets import primary_widgets
 
 screens = [
     Screen(
+        top=bar.Gap(2),
+        left=bar.Gap(2),
+        right=bar.Gap(2),
         bottom=bar.Bar(
             primary_widgets(),
             size=28,
             background=colors["bg"],
             border_width=[2, 0, 0, 0],
             border_color=colors["bg1"],
-            margin=[0, 6, 4, 6],  # top, right, bottom, left
+            margin=[1, 4, 4, 4],  # top, right, bottom, left
             opacity=0.95,
         ),
     ),

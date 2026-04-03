@@ -23,6 +23,13 @@ def autostart():
         subprocess.Popen([script])
 
 
+@hook.subscribe.screen_change
+def screen_change(event):
+    """Reconfigurar pantallas al detectar cambios de monitor."""
+    from libqtile import qtile
+    qtile.reconfigure_screens()
+
+
 # Configuracion general
 dgroups_key_binder = None
 dgroups_app_rules = []

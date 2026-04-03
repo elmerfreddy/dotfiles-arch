@@ -9,27 +9,22 @@ from settings.theme import colors
 # Configuracion compartida para los layouts
 layout_defaults = {
     "border_width": 2,
-    "margin": 6,
+    "margin": 2,
     "border_focus": colors["blue_bright"],
     "border_normal": colors["bg2"],
 }
 
 layouts = [
-    # MonadTall: una ventana principal a la izquierda, el resto apilado a la derecha
-    layout.MonadTall(
-        **layout_defaults,
-        single_border_width=0,
-        single_margin=0,
-    ),
-    # Max: cada ventana ocupa toda la pantalla
-    layout.Max(),
     # Columns: columnas redimensionables libremente
     layout.Columns(
         **layout_defaults,
         border_focus_stack=colors["aqua_bright"],
         border_on_single=False,
+        single_border_width=0,
+        single_margin=0,
     ),
-    # Floating: se configura abajo
+    # Max: cada ventana ocupa toda la pantalla
+    layout.Max(),
 ]
 
 # Reglas para ventanas que siempre deben ser flotantes
