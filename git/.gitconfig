@@ -1,11 +1,14 @@
 # ============================================
-# Git - Configuracion basica
+# Git - Configuración básica
 # ============================================
-# IMPORTANTE: Edita [user] con tus datos despues de instalar
+# Datos personales en ~/.gitconfig.local
+# Crea el archivo con:
+#   [user]
+#       name = Tu Nombre
+#       email = tu@email.com
 
-[user]
-    name = Elmer Mendoza
-    email = defreddyelmer@gmail.com
+[include]
+    path = ~/.gitconfig.local
 
 [init]
     defaultBranch = main
