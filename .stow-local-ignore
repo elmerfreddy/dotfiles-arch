@@ -1,0 +1,17 @@
+# Compiled files
+__pycache__
+\.pyc$
+\.pyo$
+
+# Editor
+\.swp$
+\.swo$
+*~
+
+# OS
+\.DS_Store
+Thumbs\.db
+
+# Git
+\.git
+\.gitignore
