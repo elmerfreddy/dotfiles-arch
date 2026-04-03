@@ -1,0 +1,73 @@
+# ==========================
+# Paquetes de escritorio (Qtile + Xorg)
+# ==========================
+
+# --- Window Manager ---
+qtile
+python-psutil
+python-iwlib
+
+# --- Terminal ---
+alacritty
+
+# --- Compositor ---
+picom
+
+# --- Lanzador de aplicaciones ---
+rofi
+
+# --- Terminal Multiplexer ---
+tmux
+
+# --- File Manager ---
+thunar
+thunar-volman
+gvfs
+tumbler
+ffmpegthumbnailer
+
+# --- Visor de imágenes ---
+viewnior
+
+# --- Wallpaper ---
+feh
+
+# --- Xorg ---
+xorg-server
+xorg-xinit
+xorg-xrandr
+xorg-xsetroot
+arandr
+
+# --- Notificaciones ---
+dunst
+libnotify
+
+# --- Audio ---
+pipewire
+pipewire-pulse
+pavucontrol
+
+# --- Utilidades del sistema ---
+network-manager-applet
+brightnessctl
+playerctl
+flameshot
+xclip
+polkit-gnome
+redshift
+
+# --- Bloqueo de pantalla ---
+xss-lock
+betterlockscreen  # AUR
+
+# --- Temas e iconos ---
+lxappearance
+arc-gtk-theme
+papirus-icon-theme
+
+# --- Accesorios ---
+galculator
+
+# --- Navegador ---
+brave-bin

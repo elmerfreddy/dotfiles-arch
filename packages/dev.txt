@@ -1,0 +1,16 @@
+# ==========================
+# Paquetes de desarrollo
+# ==========================
+
+# --- Docker ---
+docker
+docker-compose
+
+# --- Git GUI ---
+gitg
+
+# --- Java (Android Studio) ---
+jdk17-openjdk
+
+# --- Runtime version manager ---
+mise

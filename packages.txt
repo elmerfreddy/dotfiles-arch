@@ -1,15 +1,12 @@
 # ==========================
-# Dotfiles - Lista de paquetes
+# Dotfiles - Lista completa de paquetes
 # Arch Linux (pacman + AUR via yay)
 # ==========================
-
-# --- Window Manager ---
-qtile
-python-psutil
-python-iwlib
-
-# --- Terminal ---
-alacritty
+# Para instalación selectiva, usa los archivos en packages/:
+#   packages/base.txt     — Esenciales (zsh, neovim, git, CLI tools)
+#   packages/desktop.txt  — Escritorio (qtile, xorg, audio, temas)
+#   packages/dev.txt      — Desarrollo (docker, java, mise)
+#   packages/fonts.txt    — Fuentes Nerd y del sistema
 
 # --- Shell ---
 zsh
@@ -17,27 +14,10 @@ zsh
 # --- Editor ---
 neovim
 
-# --- Compositor ---
-picom
-
-# --- Lanzador de aplicaciones ---
-rofi
-
-# --- File Manager ---
-thunar
-thunar-volman
-gvfs
-tumbler
-ffmpegthumbnailer
-
-# --- Visor de imagenes ---
-viewnior
-
-# --- Wallpaper ---
-feh
-
-# --- Terminal Multiplexer ---
-tmux
+# --- Git ---
+git
+lazygit
+gitg
 
 # --- Herramientas CLI ---
 bat
@@ -50,15 +30,87 @@ unzip
 wget
 curl
 less
+stow
 
-# --- Git ---
-git
-lazygit
-gitg
+# --- Window Manager ---
+qtile
+python-psutil
+python-iwlib
+
+# --- Terminal ---
+alacritty
+
+# --- Compositor ---
+picom
+
+# --- Lanzador de aplicaciones ---
+rofi
+
+# --- Terminal Multiplexer ---
+tmux
+
+# --- File Manager ---
+thunar
+thunar-volman
+gvfs
+tumbler
+ffmpegthumbnailer
+
+# --- Visor de imágenes ---
+viewnior
+
+# --- Wallpaper ---
+feh
+
+# --- Xorg ---
+xorg-server
+xorg-xinit
+xorg-xrandr
+xorg-xsetroot
+arandr
+
+# --- Notificaciones ---
+dunst
+libnotify
+
+# --- Audio ---
+pipewire
+pipewire-pulse
+pavucontrol
+
+# --- Utilidades del sistema ---
+network-manager-applet
+brightnessctl
+playerctl
+flameshot
+xclip
+polkit-gnome
+redshift
+
+# --- Bloqueo de pantalla ---
+xss-lock
+betterlockscreen  # AUR
+
+# --- Temas e iconos ---
+lxappearance
+arc-gtk-theme
+papirus-icon-theme
+
+# --- Accesorios ---
+galculator
+
+# --- Navegador ---
+brave-bin
 
 # --- Docker ---
 docker
 docker-compose
+
+# --- Java (Android Studio) ---
+jdk17-openjdk
+
+# --- Runtime version manager ---
+mise
 
 # --- Fuentes Nerd (monospace con iconos parcheados) ---
 ttf-jetbrains-mono-nerd
@@ -73,7 +125,7 @@ ttf-meslo-nerd
 ttf-roboto-mono-nerd
 ttf-droid-nerd
 
-# --- Fuentes simbolos/fallback (renderiza iconos que falten) ---
+# --- Fuentes simbolos/fallback ---
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-mono
 ttf-font-awesome
@@ -84,48 +136,3 @@ noto-fonts
 noto-fonts-emoji
 noto-fonts-cjk
 ttf-liberation
-
-# --- Utilidades del sistema ---
-stow
-xorg-server
-xorg-xinit
-xorg-xrandr
-xorg-xsetroot
-arandr
-network-manager-applet
-brightnessctl
-playerctl
-flameshot
-xclip
-polkit-gnome
-redshift
-
-# --- Notificaciones ---
-dunst
-libnotify
-
-# --- Temas e iconos ---
-lxappearance
-arc-gtk-theme
-papirus-icon-theme
-
-# --- Audio ---
-pipewire
-pipewire-pulse
-pavucontrol
-
-# --- Bloqueo de pantalla ---
-xss-lock
-betterlockscreen  # AUR
-
-# --- Accesorios ---
-galculator
-
-# --- Navegador ---
-brave-bin
-
-# --- Java (Android Studio) ---
-jdk17-openjdk
-
-# --- AUR (requiere yay) ---
-# zsh-theme-powerlevel10k (opcional, usamos oh-my-zsh theme)

@@ -1,0 +1,26 @@
+# ==========================
+# Paquetes base (esenciales)
+# ==========================
+
+# --- Shell ---
+zsh
+
+# --- Editor ---
+neovim
+
+# --- Git ---
+git
+lazygit
+
+# --- Herramientas CLI ---
+bat
+btop
+fzf
+ripgrep
+fd
+tree
+unzip
+wget
+curl
+less
+stow
