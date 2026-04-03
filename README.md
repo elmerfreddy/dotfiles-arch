@@ -25,6 +25,7 @@ Dotfiles personales para Arch Linux con Qtile como window manager, gestionados c
 | **Docker** | Aliases vía plugin de Oh My Zsh |
 | **Java 17** | JDK para desarrollo Android (Android Studio) |
 | **Galculator** | Calculadora de escritorio GTK |
+| **Mise** | Runtime version manager para lenguajes |
 
 **Tema:** Gruvbox (consistente en todos los componentes)
 
@@ -41,9 +42,43 @@ Dotfiles personales para Arch Linux con Qtile como window manager, gestionados c
 git clone https://github.com/elmerfreddy/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
-# 2. Ejecutar el script de instalación
+# 2. Ejecutar la instalación completa
 chmod +x install.sh
 ./install.sh
+```
+
+### Instalación selectiva
+
+```bash
+# Solo paquetes base (zsh, neovim, git, CLI tools)
+./install.sh --packages --only base
+
+# Solo paquetes de escritorio
+./install.sh --packages --only desktop
+
+# Solo aplicar symlinks
+./install.sh --stow
+
+# Combinar pasos
+./install.sh --packages --stow --fonts
+
+# Ver qué haría sin ejecutar
+./install.sh --dry-run
+
+# Verificar el estado de la instalación
+./install.sh --verify
+```
+
+### Usando Make
+
+```bash
+make help              # Ver todos los comandos disponibles
+make install           # Instalación completa
+make packages-base     # Solo paquetes base
+make stow              # Solo symlinks
+make verify            # Verificar instalación
+make unstow            # Deshacer symlinks
+make update            # Actualizar paquetes y re-aplicar stow
 ```
 
 ### Qué hace `install.sh`
@@ -57,10 +92,11 @@ chmod +x install.sh
 7. Prepara el entorno para LazyVim (respaldando configuración previa de nvim)
 8. Configura permisos de ejecución en scripts
 9. Aplica todos los dotfiles con GNU Stow (symlinks a `$HOME`)
-10. Caché el wallpaper para betterlockscreen
-11. Cambia el shell predeterminado a Zsh
-12. Habilita servicios del sistema: Docker, NetworkManager
-13. Agrega al usuario al grupo `docker`
+10. Configura `~/.gitconfig.local` con datos personales (interactivo)
+11. Cachea el wallpaper para betterlockscreen
+12. Cambia el shell predeterminado a Zsh
+13. Habilita servicios del sistema: Docker, NetworkManager
+14. Ejecuta verificación post-instalación
 
 ### Post-instalación
 
@@ -69,13 +105,23 @@ Después de ejecutar `install.sh`:
 1. Cierra sesión y vuelve a iniciar
 2. Selecciona **Qtile** como window manager en tu display manager
 3. Abre Neovim (`nvim`) para que LazyVim instale plugins automáticamente
-4. Edita `~/.gitconfig` con tu nombre y email
-5. Se incluyen wallpapers de ejemplo en `~/.config/wallpapers/` (`wallpaper.jpg` se usa por defecto)
-6. Usa `lxappearance` para seleccionar el tema GTK (arc-gtk-theme + papirus-icon-theme)
+4. Se incluyen wallpapers de ejemplo en `~/.config/wallpapers/` (`wallpaper.jpg` se usa por defecto)
+5. Usa `lxappearance` para seleccionar el tema GTK (arc-gtk-theme + papirus-icon-theme)
+
+### Configuración por equipo
+
+Los datos personales de git se almacenan en `~/.gitconfig.local` (no se sube al repositorio):
+
+```bash
+# Se crea automáticamente durante la instalación, o manualmente:
+cat > ~/.gitconfig.local << 'EOF'
+[user]
+    name = Tu Nombre
+    email = tu@email.com
+EOF
+```
 
 ## Uso manual con Stow
-
-Si prefieres aplicar los dotfiles manualmente:
 
 ```bash
 cd ~/dotfiles
@@ -84,25 +130,28 @@ cd ~/dotfiles
 stow alacritty
 stow qtile
 stow zsh
-stow nvim
-stow git
-stow picom
-stow rofi
-stow tmux
-stow btop
-stow bat
-stow thunar
-stow dunst
-stow fontconfig
-stow redshift
-stow wallpapers
 
 # Aplicar todos los módulos
 stow */
 
 # Eliminar symlinks de un módulo
 stow -D alacritty
+
+# Eliminar todos los symlinks
+./install.sh --uninstall
 ```
+
+## Paquetes por categoría
+
+Los paquetes se organizan en `packages/` para instalación selectiva:
+
+| Archivo | Contenido |
+|---------|-----------|
+| `packages/base.txt` | Esenciales: zsh, neovim, git, bat, fzf, ripgrep... |
+| `packages/desktop.txt` | Escritorio: qtile, xorg, picom, rofi, audio, temas... |
+| `packages/dev.txt` | Desarrollo: docker, java, mise, gitg |
+| `packages/fonts.txt` | Nerd Fonts, Font Awesome, fuentes del sistema |
+| `packages.txt` | Lista completa (todos los anteriores) |
 
 ## Keybindings de Qtile
 
@@ -163,7 +212,7 @@ stow -D alacritty
 | Atajo | Acción |
 |-------|--------|
 | `Print` | Screenshot completo |
-| `Super + Print` | Screenshot por selección |
+| `Super + Shift + s` | Screenshot por selección |
 
 ### Hardware
 
@@ -189,8 +238,15 @@ stow -D alacritty
 
 ```
 dotfiles/
-├── install.sh
-├── packages.txt
+├── install.sh              # Instalador principal
+├── Makefile                 # Interfaz Make
+├── packages.txt             # Lista completa de paquetes
+├── packages/                # Paquetes por categoría
+│   ├── base.txt
+│   ├── desktop.txt
+│   ├── dev.txt
+│   └── fonts.txt
+├── .stow-local-ignore       # Archivos ignorados por stow
 ├── alacritty/.config/alacritty/
 │   └── alacritty.toml
 ├── bat/.config/bat/
@@ -202,13 +258,11 @@ dotfiles/
 ├── fontconfig/.config/fontconfig/
 │   └── fonts.conf
 ├── git/
-│   ├── .gitconfig
+│   ├── .gitconfig           # Config compartida (incluye .gitconfig.local)
 │   └── .gitignore_global
 ├── nvim/.config/nvim/
 │   ├── init.lua
 │   └── lua/
-│       ├── config/
-│       └── plugins/
 ├── picom/.config/picom/
 │   └── picom.conf
 ├── qtile/.config/qtile/
@@ -226,7 +280,7 @@ dotfiles/
 ├── tmux/
 │   └── .tmux.conf
 ├── wallpapers/.config/wallpapers/
-│   └── (wallpaper.jpg)
+│   └── wallpaper.jpg
 └── zsh/
     ├── .zshrc
     └── .zsh_aliases
@@ -241,53 +295,33 @@ dotfiles/
 **Solución**: Stow requiere que el directorio padre (`~/.config/`) exista antes de crear los symlinks.
 
 ```bash
-# Crear el directorio manualmente
 mkdir -p ~/.config
-
-# Luego aplicar stow
 cd ~/dotfiles
 stow wallpapers
-
-# Verificar que funcionó
 ls -la ~/.config/wallpapers/
-
-# Si aún no funciona, crear symlink manual
-ln -s ~/dotfiles/wallpapers/.config/wallpapers ~/.config/wallpapers
 ```
 
-**Nota**: El script `install.sh` ya ha sido corregido para crear estos directorios automáticamente, así que este problema no ocurrirá en instalaciones nuevas.
+**Nota**: El script `install.sh` crea estos directorios automáticamente.
 
 ### Stow falla con otros módulos
 
-Si encuentras el mismo problema con otros módulos (nvim, qtile, etc.):
-
 ```bash
-# Crear todos los directorios necesarios
 mkdir -p ~/.config ~/.local/share
-
-# Luego aplicar stow
 cd ~/dotfiles
-stow <modulo_name>
+stow <módulo>
 ```
 
 ### El fondo de pantalla no persiste después de reiniciar
 
-Asegúrate de que:
-
-1. El symlink de wallpapers está correctamente creado:
-   ```bash
-   ls -la ~/.config/wallpapers/
-   ```
-
-2. El script `autostart.sh` está en su lugar:
-   ```bash
-   ls -la ~/.config/qtile/autostart.sh
-   ```
-
+1. Verifica el symlink: `ls -la ~/.config/wallpapers/`
+2. Verifica autostart: `ls -la ~/.config/qtile/autostart.sh`
 3. Reinicia Qtile: `Super + Shift + r`
+4. Para cambiar el wallpaper, edita `~/.config/qtile/autostart.sh`
 
-4. Si deseas cambiar el wallpaper permanentemente, edita:
-   ```bash
-   nvim ~/.config/qtile/autostart.sh
-   # Cambia wallpaper.jpg por el nombre de la imagen deseada
-   ```
+### Verificar la instalación
+
+```bash
+./install.sh --verify
+# o
+make verify
+```
