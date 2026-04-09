@@ -59,6 +59,7 @@ ffmpegthumbnailer
 # --- Automontaje USB / gestión de discos ---
 udisks2
 udiskie
+python-pyxdg
 gnome-disk-utility
 
 # --- Visor de imágenes ---
@@ -73,6 +74,7 @@ xorg-xinit
 xorg-xrandr
 xorg-xsetroot
 arandr
+autorandr
 
 # --- Notificaciones ---
 dunst
@@ -85,6 +87,7 @@ pavucontrol
 
 # --- Utilidades del sistema ---
 network-manager-applet
+libappindicator-gtk3
 brightnessctl
 playerctl
 flameshot
