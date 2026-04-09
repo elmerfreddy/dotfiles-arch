@@ -36,6 +36,7 @@ stow
 qtile
 python-psutil
 python-iwlib
+python-dbus-fast  # Necesario para StatusNotifier, reconfigure_screens y sleep hooks
 
 # --- Terminal ---
 alacritty
@@ -74,7 +75,7 @@ xorg-xinit
 xorg-xrandr
 xorg-xsetroot
 arandr
-autorandr
+autorandr  # Perfiles automáticos de monitores (Super+Shift+p)
 
 # --- Notificaciones ---
 dunst

@@ -98,15 +98,46 @@ make update            # Actualizar paquetes y re-aplicar stow
 13. Habilita servicios del sistema: Docker, NetworkManager
 14. Ejecuta verificación post-instalación
 
+### Display manager
+
+Este setup usa **SDDM** como display manager. Si no lo tienes instalado:
+
+```bash
+yay -S sddm
+systemctl enable sddm
+```
+
+Alternativamente, puedes usar `xinit` agregando `exec qtile start` a `~/.xinitrc` y corriendo `startx`.
+
 ### Post-instalación
 
 Después de ejecutar `install.sh`:
 
 1. Cierra sesión y vuelve a iniciar
-2. Selecciona **Qtile** como window manager en tu display manager
+2. Selecciona **Qtile** como window manager en SDDM (o ejecuta `startx`)
 3. Abre Neovim (`nvim`) para que LazyVim instale plugins automáticamente
 4. Se incluyen wallpapers de ejemplo en `~/.config/wallpapers/` (`wallpaper.jpg` se usa por defecto)
 5. Usa `lxappearance` para seleccionar el tema GTK (arc-gtk-theme + papirus-icon-theme)
+
+> **Nota:** Si instalaste via `stow` sin usar `install.sh`, ejecuta manualmente:
+> ```bash
+> betterlockscreen -u ~/.config/wallpapers/wallpaper.jpg
+> ```
+> Esto cachea el wallpaper para el bloqueo de pantalla. Sin este paso, `xss-lock` fallará silenciosamente.
+
+### Redshift — ubicación geográfica
+
+El archivo `~/.config/redshift.conf` tiene coordenadas hardcodeadas. Edítalas para tu ciudad:
+
+```bash
+# Ejemplo para Lima, Perú
+# En ~/.config/redshift.conf:
+[redshift]
+lat=...
+lon=...
+```
+
+Puedes obtener tus coordenadas en [latlong.net](https://www.latlong.net).
 
 ### Configuración por equipo
 
@@ -285,6 +316,12 @@ dotfiles/
     ├── .zshrc
     └── .zsh_aliases
 ```
+
+## Notas de configuración
+
+### Thunar — archivos auto-generados
+
+`thunar/accels.scm` y `thunar/uca.xml` son generados automáticamente por la GUI de Thunar cuando cambias atajos o acciones personalizadas. Si ves diffs inesperados en estos archivos después de usar Thunar, es comportamiento normal — Thunar regenera su formato al guardar.
 
 ## Troubleshooting
 
