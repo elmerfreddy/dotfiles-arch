@@ -77,8 +77,8 @@ def primary_widgets():
 
         # --- Zona derecha ---
 
-        # Systray
-        widget.Systray(
+        # Systray (StatusNotifier soporta reconfigure_screens, requiere python-dbus-fast).
+        widget.StatusNotifier(
             background=colors["bg"],
             padding=5,
         ),
