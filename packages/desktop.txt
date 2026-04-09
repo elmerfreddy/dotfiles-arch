@@ -6,6 +6,7 @@
 qtile
 python-psutil
 python-iwlib
+python-dbus-fast  # Necesario para reconfigure_screens, StatusNotifier y sleep hooks
 
 # --- Terminal ---
 alacritty
@@ -25,6 +26,11 @@ thunar-volman
 gvfs
 tumbler
 ffmpegthumbnailer
+
+# --- Automontaje USB / gestión de discos ---
+udisks2
+udiskie
+gnome-disk-utility
 
 # --- Visor de imágenes ---
 viewnior

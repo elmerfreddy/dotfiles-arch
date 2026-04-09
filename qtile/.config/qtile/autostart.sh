@@ -20,6 +20,9 @@ feh --bg-fill --no-fehbg /usr/share/backgrounds/archlinux/simple.png 2>/dev/null
 # Tray applets
 nm-applet &
 
+# Automontaje de dispositivos extraíbles (USB) con icono en bandeja
+udiskie --tray &
+
 # Notificaciones
 dunst &
 

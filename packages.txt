@@ -56,6 +56,11 @@ gvfs
 tumbler
 ffmpegthumbnailer
 
+# --- Automontaje USB / gestión de discos ---
+udisks2
+udiskie
+gnome-disk-utility
+
 # --- Visor de imágenes ---
 viewnior
 
