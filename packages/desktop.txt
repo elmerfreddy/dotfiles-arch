@@ -30,6 +30,7 @@ ffmpegthumbnailer
 # --- Automontaje USB / gestión de discos ---
 udisks2
 udiskie
+python-pyxdg  # Requerido por udiskie --appindicator
 gnome-disk-utility
 
 # --- Visor de imágenes ---
@@ -44,6 +45,7 @@ xorg-xinit
 xorg-xrandr
 xorg-xsetroot
 arandr
+autorandr  # Perfiles automáticos de monitores (mod+shift+p)
 
 # --- Notificaciones ---
 dunst
@@ -56,6 +58,7 @@ pavucontrol
 
 # --- Utilidades del sistema ---
 network-manager-applet
+libappindicator-gtk3  # Soporte SNI para nm-applet --indicator y udiskie --appindicator
 brightnessctl
 playerctl
 flameshot

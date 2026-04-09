@@ -8,7 +8,7 @@
 picom --daemon &
 
 # Luz cálida nocturna (ubicación manual en redshift.conf)
-redshift-gtk &
+(sleep 5 && redshift-gtk) &
 
 # Wallpaper
 feh --bg-fill --no-fehbg ~/.config/wallpapers/wallpaper.jpg 2>/dev/null || \

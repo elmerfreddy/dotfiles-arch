@@ -45,7 +45,8 @@ keys = [
     Key([mod], "r", lazy.spawn("rofi -show run"), desc="Rofi run"),
     Key([mod], "e", lazy.spawn("thunar"), desc="File manager"),
     Key([mod], "b", lazy.spawn("brave"), desc="Navegador web"),
-    Key([mod], "p", lazy.spawn("arandr"), desc="Configuracion de pantallas"),
+    Key([mod], "p", lazy.spawn("arandr"), desc="Configuracion de pantallas (GUI)"),
+    Key([mod, "shift"], "p", lazy.spawn("autorandr --change"), desc="Aplicar perfil de pantallas (autorandr)"),
 
     # ---- Bloqueo de pantalla ----
     Key([mod, "shift"], "x", lazy.spawn("betterlockscreen -l"), desc="Bloquear pantalla"),

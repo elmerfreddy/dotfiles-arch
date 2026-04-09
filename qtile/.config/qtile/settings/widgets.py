@@ -77,10 +77,13 @@ def primary_widgets():
 
         # --- Zona derecha ---
 
-        # Systray (StatusNotifier soporta reconfigure_screens, requiere python-dbus-fast).
-        widget.StatusNotifier(
+        # Systray (iconos del sistema: wifi, redshift, udiskie)
+        # Nota: Systray solo funciona en una screen. Si hay multi-monitor,
+        # usar trayer en autostart.sh para los demás.
+        widget.Systray(
             background=colors["bg"],
             padding=5,
+            icon_theme="Papirus",
         ),
 
         separator(),

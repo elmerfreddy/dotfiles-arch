@@ -19,12 +19,18 @@ groups = [
     Group("9", label="9"),    # Misc
 ]
 
+def go_to_group(name):
+    def _inner(qtile):
+        qtile.current_screen.set_group(qtile.groups_map[name])
+    return lazy.function(_inner)
+
+
 for g in groups:
     keys.extend([
         # Cambiar al workspace
         Key(
             [mod], g.name,
-            lazy.group[g.name].toscreen(),
+            go_to_group(g.name),
             desc=f"Cambiar al grupo {g.name}",
         ),
         # Mover ventana al workspace
