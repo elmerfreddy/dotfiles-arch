@@ -23,11 +23,22 @@ def autostart():
         subprocess.Popen([script])
 
 
-@hook.subscribe.screen_change
-def screen_change(event):
-    """Reconfigurar pantallas al detectar cambios de monitor."""
+@hook.subscribe.screens_reconfigured
+def screens_reconfigured():
+    """Sanear referencias de grupos tras reconfigurar pantallas.
+
+    Se ejecuta DESPUÉS de que qtile actualiza su estado interno de
+    pantallas. Cuando se desconecta un monitor, los grupos que estaban
+    visibles allí conservan una referencia .screen obsoleta, haciéndolos
+    inaccesibles por keybindings (p.ej. mod+2 no hace nada). Desasociarlos
+    los devuelve al comportamiento normal de grupos de fondo.
+    """
     from libqtile import qtile
-    qtile.reconfigure_screens()
+
+    valid_screens = set(qtile.screens)
+    for group in qtile.groups:
+        if group.screen is not None and group.screen not in valid_screens:
+            group.screen = None
 
 
 # Configuracion general
