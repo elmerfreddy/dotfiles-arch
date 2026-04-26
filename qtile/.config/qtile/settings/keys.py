@@ -2,11 +2,22 @@
 # Qtile - Keybindings
 # ============================================
 
+import os
+
 from libqtile.config import Key
 from libqtile.lazy import lazy
 
 mod = "mod4"  # Super key
 terminal = "alacritty"
+
+
+@lazy.function
+def unminimize_all(qtile):
+    """Restaura todas las ventanas minimizadas del grupo actual."""
+    for win in qtile.current_group.windows:
+        if win.minimized:
+            win.toggle_minimize()
+
 
 keys = [
     # ---- Navegacion entre ventanas (estilo vim) ----
@@ -38,6 +49,8 @@ keys = [
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),
     Key([mod], "space", lazy.window.toggle_floating(), desc="Toggle floating"),
     Key([mod], "m", lazy.window.toggle_minimize(), desc="Toggle minimize"),
+    Key([mod, "shift"], "m", unminimize_all,
+        desc="Restaurar todas las ventanas minimizadas del grupo"),
 
     # ---- Aplicaciones ----
     Key([mod], "Return", lazy.spawn(terminal), desc="Abrir terminal"),
@@ -52,7 +65,7 @@ keys = [
     Key([mod, "shift"], "x", lazy.spawn("betterlockscreen -l"), desc="Bloquear pantalla"),
 
     # ---- Screenshots ----
-    Key([], "Print", lazy.spawn("flameshot full -p ~/Pictures/"), desc="Screenshot completo"),
+    Key([], "Print", lazy.spawn("flameshot full -p " + os.path.expanduser("~/Pictures/")), desc="Screenshot completo"),
     Key([mod, "shift"], "s", lazy.spawn("flameshot gui"), desc="Screenshot con seleccion (como Win+Shift+S)"),
 
     # ---- Audio ----

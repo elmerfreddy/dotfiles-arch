@@ -78,8 +78,7 @@ def primary_widgets():
         # --- Zona derecha ---
 
         # Systray (iconos del sistema: wifi, redshift, udiskie)
-        # Nota: Systray solo funciona en una screen. Si hay multi-monitor,
-        # usar trayer en autostart.sh para los demás.
+        # Nota: Systray solo funciona en la pantalla principal.
         widget.Systray(
             background=colors["bg"],
             padding=5,

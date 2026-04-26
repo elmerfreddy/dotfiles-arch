@@ -23,30 +23,6 @@ def autostart():
         subprocess.Popen([script])
 
 
-@hook.subscribe.screens_reconfigured
-def screens_reconfigured():
-    """Sanear referencias de grupos tras reconfigurar pantallas.
-
-    Se ejecuta DESPUÉS de que qtile actualiza su estado interno de
-    pantallas. Limpia grupos con .screen obsoleto y resetea
-    previous_group de las pantallas activas si apunta a un grupo
-    en estado inconsistente.
-    """
-    from libqtile import qtile
-
-    active_screens = set(qtile.screens)
-
-    for group in qtile.groups:
-        if group.screen is not None and group.screen not in active_screens:
-            group.screen = None
-
-    for scr in qtile.screens:
-        prev = getattr(scr, 'previous_group', None)
-        if prev is not None:
-            if prev.screen is None or prev.screen not in active_screens:
-                scr.previous_group = None
-
-
 # Configuracion general
 dgroups_key_binder = None
 dgroups_app_rules = []
@@ -59,4 +35,3 @@ focus_on_window_activation = "smart"
 reconfigure_screens = True
 auto_minimize = True
 wl_input_rules = None
-wmname = "LG3D"  # Compatibilidad con Java
