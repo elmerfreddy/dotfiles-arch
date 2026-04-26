@@ -11,18 +11,24 @@ Dotfiles personales para Arch Linux con Qtile como window manager, gestionados c
 | **Zsh + Oh My Zsh** | Shell con plugins y autocompletado |
 | **Neovim (LazyVim)** | Editor de texto/código |
 | **Rofi** | Lanzador de aplicaciones |
-| **Picom** | Compositor (transparencias, sombras) |
+| **Picom** | Compositor (transparencias, sombras, blur) |
 | **Tmux** | Multiplexor de terminal |
 | **Git** | Control de versiones con aliases útiles |
 | **Dunst** | Daemon de notificaciones de escritorio |
 | **Bat** | Reemplazo de `cat` con resaltado de sintaxis |
 | **Btop** | Monitor de recursos del sistema |
-| **Thunar** | Administrador de archivos |
-| **Redshift** | Filtro de luz azul nocturna |
+| **Thunar** | Administrador de archivos con automontaje |
+| **Redshift** | Filtro de luz azul nocturna (modo manual) |
 | **Fontconfig** | Configuración de renderizado de fuentes |
 | **Betterlockscreen** | Bloqueo de pantalla con wallpaper |
 | **Viewnior** | Visor de imágenes ligero |
-| **Docker** | Aliases vía plugin de Oh My Zsh |
+| **Mpv** | Reproductor de video/audio |
+| **Feh** | Visor de imágenes / setter de wallpaper |
+| **Flameshot** | Screenshots con selección y anotaciones |
+| **Udiskie** | Automontaje de dispositivos USB (systray) |
+| **Autorandr** | Perfiles automáticos de monitores |
+| **Polkit-gnome** | Agente de autenticación GTK |
+| **Docker** | Contenedores + aliases vía plugin de Oh My Zsh |
 | **Java 17** | JDK para desarrollo Android (Android Studio) |
 | **Galculator** | Calculadora de escritorio GTK |
 | **Mise** | Runtime version manager para lenguajes |
@@ -100,14 +106,21 @@ make update            # Actualizar paquetes y re-aplicar stow
 
 ### Display manager
 
-Este setup usa **SDDM** como display manager. Si no lo tienes instalado:
+Este setup usa **LightDM** como display manager. Si no lo tienes instalado:
+
+```bash
+yay -S lightdm lightdm-gtk-greeter
+systemctl enable lightdm
+```
+
+Alternativamente, puedes usar **SDDM**:
 
 ```bash
 yay -S sddm
 systemctl enable sddm
 ```
 
-Alternativamente, puedes usar `xinit` agregando `exec qtile start` a `~/.xinitrc` y corriendo `startx`.
+O `xinit`, agregando `exec qtile start` a `~/.xinitrc` y corriendo `startx`.
 
 ### Post-instalación
 
@@ -127,17 +140,15 @@ Después de ejecutar `install.sh`:
 
 ### Redshift — ubicación geográfica
 
-El archivo `~/.config/redshift.conf` tiene coordenadas hardcodeadas. Edítalas para tu ciudad:
+El archivo `~/.config/redshift.conf` está configurado para **La Paz, Bolivia** con `location-provider=manual`. Para otra ciudad, edita `lat` y `lon` en la sección `[manual]`:
 
-```bash
-# Ejemplo para Lima, Perú
-# En ~/.config/redshift.conf:
-[redshift]
-lat=...
-lon=...
+```ini
+[manual]
+lat=-12.04   # Lima, Perú
+lon=-77.03
 ```
 
-Puedes obtener tus coordenadas en [latlong.net](https://www.latlong.net).
+Obtén tus coordenadas en [latlong.net](https://www.latlong.net).
 
 ### Configuración por equipo
 
@@ -178,8 +189,8 @@ Los paquetes se organizan en `packages/` para instalación selectiva:
 
 | Archivo | Contenido |
 |---------|-----------|
-| `packages/base.txt` | Esenciales: zsh, neovim, git, bat, fzf, ripgrep... |
-| `packages/desktop.txt` | Escritorio: qtile, xorg, picom, rofi, audio, temas... |
+| `packages/base.txt` | Esenciales: zsh, neovim, git, bat, fzf, ripgrep, p7zip... |
+| `packages/desktop.txt` | Escritorio: qtile, xorg, picom, rofi, audio, temas, mpv, codecs... |
 | `packages/dev.txt` | Desarrollo: docker, java, mise, gitg |
 | `packages/fonts.txt` | Nerd Fonts, Font Awesome, fuentes del sistema |
 | `packages.txt` | Lista completa (todos los anteriores) |
@@ -216,6 +227,7 @@ Los paquetes se organizan en `packages/` para instalación selectiva:
 | `Super + f` | Toggle fullscreen |
 | `Super + Space` | Toggle floating |
 | `Super + m` | Toggle minimize |
+| `Super + Shift + m` | Restaurar todas las ventanas minimizadas del grupo |
 | `Super + Tab` | Siguiente layout |
 | `Super + Shift + Tab` | Layout anterior |
 
@@ -235,7 +247,8 @@ Los paquetes se organizan en `packages/` para instalación selectiva:
 | `Super + r` | Rofi (ejecutar comando) |
 | `Super + e` | Thunar (file manager) |
 | `Super + b` | Brave (navegador) |
-| `Super + p` | Arandr (configuración de pantallas) |
+| `Super + p` | Arandr (configuración de pantallas, GUI) |
+| `Super + Shift + p` | Autorandr (aplicar perfil de monitores automático) |
 | `Super + Shift + x` | Bloquear pantalla |
 
 ### Screenshots
@@ -311,10 +324,13 @@ dotfiles/
 ├── tmux/
 │   └── .tmux.conf
 ├── wallpapers/.config/wallpapers/
-│   └── wallpaper.jpg
+│   ├── wallpaper.jpg          # Wallpaper por defecto
+│   ├── forest.jpg
+│   ├── mountains.jpg
+│   └── night-sky.jpg
 └── zsh/
-    ├── .zshrc
-    └── .zsh_aliases
+    ├── .zshrc                 # Config principal + Oh My Zsh + fzf + mise
+    └── .zsh_aliases           # Aliases: git, docker, pacman, qtile, CLI tools
 ```
 
 ## Notas de configuración
