@@ -36,6 +36,9 @@ gnome-disk-utility
 # --- Visor de imágenes ---
 viewnior
 
+# --- Reproductor de video ---
+mpv
+
 # --- Wallpaper ---
 feh
 
@@ -44,6 +47,8 @@ xorg-server
 xorg-xinit
 xorg-xrandr
 xorg-xsetroot
+xdotool      # Automatización de ventanas/teclado/ratón (útil para scripts)
+xorg-xprop   # Inspección de propiedades de ventanas (debug floating rules)
 arandr
 autorandr  # Perfiles automáticos de monitores (mod+shift+p)
 

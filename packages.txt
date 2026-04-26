@@ -27,6 +27,7 @@ ripgrep
 fd
 tree
 unzip
+p7zip
 wget
 curl
 less
@@ -66,6 +67,9 @@ gnome-disk-utility
 # --- Visor de imágenes ---
 viewnior
 
+# --- Reproductor de video ---
+mpv
+
 # --- Wallpaper ---
 feh
 
@@ -74,6 +78,8 @@ xorg-server
 xorg-xinit
 xorg-xrandr
 xorg-xsetroot
+xdotool      # Automatización de ventanas/teclado/ratón (útil para scripts)
+xorg-xprop   # Inspección de propiedades de ventanas (debug floating rules)
 arandr
 autorandr  # Perfiles automáticos de monitores (Super+Shift+p)
 
@@ -123,16 +129,7 @@ mise
 
 # --- Fuentes Nerd (monospace con iconos parcheados) ---
 ttf-jetbrains-mono-nerd
-ttf-firacode-nerd
 ttf-hack-nerd
-ttf-cascadia-code-nerd
-ttf-sourcecodepro-nerd
-ttf-ubuntu-nerd
-ttf-inconsolata-nerd
-ttf-iosevka-nerd
-ttf-meslo-nerd
-ttf-roboto-mono-nerd
-ttf-droid-nerd
 
 # --- Fuentes simbolos/fallback ---
 ttf-nerd-fonts-symbols
