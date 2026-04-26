@@ -16,3 +16,6 @@ Thumbs.db
 __pycache__/
 *.pyc
 *.pyo
+
+# Claude agent
+.claude/
