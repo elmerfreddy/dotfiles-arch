@@ -110,18 +110,6 @@ check_vim_not_installed() {
     fi
 }
 
-# Lee paquetes de un archivo, ignorando comentarios y líneas vacías
-_read_packages() {
-    local file="$1"
-    local packages=()
-    while IFS= read -r line; do
-        line=$(echo "$line" | sed 's/#.*//' | xargs)
-        [ -z "$line" ] && continue
-        packages+=("$line")
-    done < "$file"
-    echo "${packages[@]}"
-}
-
 install_packages() {
     local only_categories="${1:-}"
     local packages=()
@@ -268,9 +256,20 @@ remove_stow() {
 }
 
 set_zsh_shell() {
-    if [ "$SHELL" != "$(which zsh)" ]; then
+    local zsh_path
+    zsh_path="$(which zsh 2>/dev/null)"
+    if [ -z "$zsh_path" ]; then
+        warn "zsh no encontrado en PATH. Instala zsh primero."
+        return 1
+    fi
+    if [ "$SHELL" != "$zsh_path" ]; then
+        # Verificar que zsh esté en /etc/shells (requerido por chsh)
+        if ! grep -qx "$zsh_path" /etc/shells; then
+            warn "$zsh_path no está en /etc/shells. Añadiéndolo..."
+            run sudo sh -c "echo '$zsh_path' >> /etc/shells"
+        fi
         info "Cambiando shell predeterminado a Zsh..."
-        run chsh -s "$(which zsh)"
+        run chsh -s "$zsh_path"
         success "Shell cambiado a Zsh. Reinicia sesión para aplicar."
     else
         success "Zsh ya es el shell predeterminado."
@@ -384,6 +383,24 @@ verify_installation() {
                     ((errors++)) || true
                 fi
                 ;;
+            redshift)
+                # redshift stow produce ~/.config/redshift.conf (archivo, no directorio)
+                if [ -L "$HOME/.config/redshift.conf" ] || [ -f "$HOME/.config/redshift.conf" ]; then
+                    success "  $module: symlink OK"
+                else
+                    warn "  $module: symlink NO encontrado (~/.config/redshift.conf)"
+                    ((errors++)) || true
+                fi
+                ;;
+            thunar)
+                # Thunar usa directorio con mayúscula: ~/.config/Thunar
+                if [ -L "$HOME/.config/Thunar" ] || [ -d "$HOME/.config/Thunar" ]; then
+                    success "  $module: symlink OK"
+                else
+                    warn "  $module: symlink NO encontrado (~/.config/Thunar)"
+                    ((errors++)) || true
+                fi
+                ;;
             *)
                 if [ -L "$HOME/.config/$module" ] || [ -d "$HOME/.config/$module" ]; then
                     success "  $module: symlink OK"
@@ -404,7 +421,9 @@ verify_installation() {
     fi
 
     # Verificar comandos esenciales
-    for cmd in nvim stow git zsh bat btop fzf rg fd alacritty qtile; do
+    for cmd in nvim stow git zsh bat btop fzf rg fd alacritty qtile \
+               feh picom dunst rofi flameshot udiskie betterlockscreen \
+               playerctl brightnessctl autorandr; do
         if command -v "$cmd" &>/dev/null; then
             success "Comando: $cmd disponible"
         else
@@ -412,6 +431,15 @@ verify_installation() {
             ((errors++)) || true
         fi
     done
+
+    # Verificar binario polkit-gnome
+    local polkit_bin="/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+    if [ -x "$polkit_bin" ]; then
+        success "Polkit: agente GTK disponible"
+    else
+        warn "Polkit: agente GTK no encontrado ($polkit_bin)"
+        ((errors++)) || true
+    fi
 
     # Verificar fuentes
     local nerd_count
@@ -587,6 +615,7 @@ main() {
     fi
 
     if $do_stow; then
+        install_lazyvim
         set_permissions
         create_stow_dirs
         apply_stow
