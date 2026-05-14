@@ -18,6 +18,7 @@ Dotfiles personales para Arch Linux con Qtile como window manager, gestionados c
 | **Bat** | Reemplazo de `cat` con resaltado de sintaxis |
 | **Btop** | Monitor de recursos del sistema |
 | **Thunar** | Administrador de archivos con automontaje |
+| **Xarchiver** | Visor/extractor de archivos comprimidos integrado en Thunar (.tar, .zip, .7z) |
 | **Redshift** | Filtro de luz azul nocturna (modo manual) |
 | **Fontconfig** | Configuración de renderizado de fuentes |
 | **Betterlockscreen** | Bloqueo de pantalla con wallpaper |
@@ -92,7 +93,7 @@ make update            # Actualizar paquetes y re-aplicar stow
 1. Verifica que el sistema sea Arch Linux
 2. Instala `yay` (AUR helper) si no está presente
 3. **Desinstala vim/gvim** si están presentes (este entorno usa neovim exclusivamente)
-4. Instala todos los paquetes desde `packages.txt` vía `yay`
+4. Instala todos los paquetes desde `packages/*.txt` vía `yay`
 5. Actualiza caché de fuentes y verifica Nerd Fonts
 6. Instala Oh My Zsh y plugins externos (autosuggestions, syntax-highlighting)
 7. Prepara el entorno para LazyVim (respaldando configuración previa de nvim)
@@ -189,11 +190,10 @@ Los paquetes se organizan en `packages/` para instalación selectiva:
 
 | Archivo | Contenido |
 |---------|-----------|
-| `packages/base.txt` | Esenciales: zsh, neovim, git, bat, fzf, ripgrep, p7zip... |
-| `packages/desktop.txt` | Escritorio: qtile, xorg, picom, rofi, audio, temas, mpv, codecs... |
+| `packages/base.txt` | Esenciales: zsh, neovim, git, bat, fzf, ripgrep, p7zip, zip... |
+| `packages/desktop.txt` | Escritorio: qtile, xorg, picom, rofi, audio, temas, mpv, thunar-archive-plugin... |
 | `packages/dev.txt` | Desarrollo: docker, java, mise, gitg |
 | `packages/fonts.txt` | Nerd Fonts, Font Awesome, fuentes del sistema |
-| `packages.txt` | Lista completa (todos los anteriores) |
 
 ## Keybindings de Qtile
 
@@ -284,7 +284,6 @@ Los paquetes se organizan en `packages/` para instalación selectiva:
 dotfiles/
 ├── install.sh              # Instalador principal
 ├── Makefile                 # Interfaz Make
-├── packages.txt             # Lista completa de paquetes
 ├── packages/                # Paquetes por categoría
 │   ├── base.txt
 │   ├── desktop.txt
