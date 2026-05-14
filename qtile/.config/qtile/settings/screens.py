@@ -19,7 +19,6 @@ screens = [
             border_width=[2, 0, 0, 0],
             border_color=colors["bg1"],
             margin=[1, 4, 4, 4],  # top, right, bottom, left
-            opacity=0.95,
         ),
     ),
 ]

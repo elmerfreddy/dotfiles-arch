@@ -5,7 +5,21 @@
 
 import os
 import subprocess
-from libqtile import hook
+from libqtile import bar, hook
+
+# Monkey-patch: guard Bar._actual_draw against finalize/draw race
+# (qtile 0.35.0 + cffi 2.0 + Python 3.14 bug: drawer deleted before queued callback fires)
+# Idempotent: skip re-patching on qtile restart (same process, config re-import)
+if not getattr(bar.Bar._actual_draw, "_is_safe_patch", False):
+    _original_actual_draw = bar.Bar._actual_draw
+
+    def _safe_actual_draw(self):
+        if not hasattr(self, "drawer"):
+            return
+        _original_actual_draw(self)
+
+    _safe_actual_draw._is_safe_patch = True
+    bar.Bar._actual_draw = _safe_actual_draw
 
 from settings.keys import keys
 from settings.groups import groups
@@ -32,6 +46,6 @@ floats_kept_above = True
 cursor_warp = False
 auto_fullscreen = True
 focus_on_window_activation = "smart"
-reconfigure_screens = True
+reconfigure_screens = False  # avoids draw-after-finalize race on bar reconfigure
 auto_minimize = True
 wl_input_rules = None
