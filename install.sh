@@ -21,7 +21,6 @@
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PACKAGES_FILE="$DOTFILES_DIR/packages.txt"
 PACKAGES_DIR="$DOTFILES_DIR/packages"
 DRY_RUN=false
 
@@ -113,6 +112,7 @@ check_vim_not_installed() {
 install_packages() {
     local only_categories="${1:-}"
     local packages=()
+    local files_to_read=()
 
     if [ -n "$only_categories" ]; then
         # Instalar solo categorías específicas
@@ -121,24 +121,26 @@ install_packages() {
             local cat_file="$PACKAGES_DIR/${cat}.txt"
             if [ -f "$cat_file" ]; then
                 info "Leyendo paquetes de packages/${cat}.txt..."
-                while IFS= read -r line; do
-                    line=$(echo "$line" | sed 's/#.*//' | xargs)
-                    [ -z "$line" ] && continue
-                    packages+=("$line")
-                done < "$cat_file"
+                files_to_read+=("$cat_file")
             else
                 warn "Categoría no encontrada: ${cat} (packages/${cat}.txt)"
             fi
         done
     else
-        # Instalar todos los paquetes
-        info "Instalando paquetes desde packages.txt..."
+        # Todas las categorías
+        info "Instalando paquetes desde packages/*.txt..."
+        for f in "$PACKAGES_DIR"/*.txt; do
+            [ -f "$f" ] && files_to_read+=("$f")
+        done
+    fi
+
+    for f in "${files_to_read[@]}"; do
         while IFS= read -r line; do
             line=$(echo "$line" | sed 's/#.*//' | xargs)
             [ -z "$line" ] && continue
             packages+=("$line")
-        done < "$PACKAGES_FILE"
-    fi
+        done < "$f"
+    done
 
     if [ ${#packages[@]} -gt 0 ]; then
         run yay -S --needed --noconfirm "${packages[@]}"
