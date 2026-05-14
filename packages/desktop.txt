@@ -26,6 +26,8 @@ thunar-volman
 gvfs
 tumbler
 ffmpegthumbnailer
+thunar-archive-plugin  # Menú contextual: extraer/crear archivos comprimidos
+xarchiver              # GUI ligera GTK3 para listar/extraer .tar, .zip, .7z, etc.
 
 # --- Automontaje USB / gestión de discos ---
 udisks2
