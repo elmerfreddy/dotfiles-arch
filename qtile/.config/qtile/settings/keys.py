@@ -28,17 +28,17 @@ keys = [
     Key([mod], "n", lazy.layout.next(), desc="Siguiente ventana"),
 
     # ---- Mover ventanas ----
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Mover ventana a la izquierda"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Mover ventana a la derecha"),
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Mover ventana abajo"),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Mover ventana arriba"),
+    Key([mod, "shift"], "h", lazy.layout.shuffle_left().when(layout="columns"), desc="Mover ventana a la izquierda"),
+    Key([mod, "shift"], "l", lazy.layout.shuffle_right().when(layout="columns"), desc="Mover ventana a la derecha"),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down().when(layout="columns"), desc="Mover ventana abajo"),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up().when(layout="columns"), desc="Mover ventana arriba"),
 
     # ---- Redimensionar ventanas ----
-    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Crecer ventana izquierda"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Crecer ventana derecha"),
-    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Crecer ventana abajo"),
-    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Crecer ventana arriba"),
-    Key([mod, "shift"], "n", lazy.layout.normalize(), desc="Normalizar tamanos"),
+    Key([mod, "control"], "h", lazy.layout.grow_left().when(layout="columns"), desc="Crecer ventana izquierda"),
+    Key([mod, "control"], "l", lazy.layout.grow_right().when(layout="columns"), desc="Crecer ventana derecha"),
+    Key([mod, "control"], "j", lazy.layout.grow_down().when(layout="columns"), desc="Crecer ventana abajo"),
+    Key([mod, "control"], "k", lazy.layout.grow_up().when(layout="columns"), desc="Crecer ventana arriba"),
+    Key([mod, "shift"], "n", lazy.layout.normalize().when(layout="columns"), desc="Normalizar tamanos"),
 
     # ---- Layout ----
     Key([mod], "Tab", lazy.next_layout(), desc="Siguiente layout"),
