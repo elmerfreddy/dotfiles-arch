@@ -19,3 +19,6 @@ __pycache__/
 
 # Claude agent
 .claude/
+
+# Salidas generadas (auditorías de grafos, metadatos con rutas locales)
+graphify-out/
