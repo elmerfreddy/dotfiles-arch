@@ -40,6 +40,6 @@ opt.sidescrolloff = 8
 
 -- Backup
 opt.backup = false
-opt.writebackup = false
-opt.swapfile = false
-opt.undofile = true              -- Persistent undo
+opt.writebackup = true            -- Backup temporal durante escritura
+opt.swapfile = true               -- Recuperación ante caída (undo no cubre no-guardados)
+opt.undofile = true               -- Persistent undo
