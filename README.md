@@ -46,7 +46,7 @@ Dotfiles personales para Arch Linux con Qtile como window manager, gestionados c
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/elmerfreddy/dotfiles.git ~/dotfiles
+git clone https://github.com/elmerfreddy/dotfiles-arch.git ~/dotfiles
 cd ~/dotfiles
 
 # 2. Ejecutar la instalación completa
@@ -69,10 +69,11 @@ chmod +x install.sh
 # Combinar pasos
 ./install.sh --packages --stow --fonts
 
-# Ver qué haría sin ejecutar
+# Ver qué haría sin ejecutar (solo o combinado con otros flags)
 ./install.sh --dry-run
+./install.sh --dry-run --packages --only base
 
-# Verificar el estado de la instalación
+# Verificar el estado de la instalación (exit 1 si algo falla)
 ./install.sh --verify
 ```
 
@@ -86,24 +87,28 @@ make stow              # Solo symlinks
 make verify            # Verificar instalación
 make unstow            # Deshacer symlinks
 make update            # Actualizar paquetes y re-aplicar stow
+make check             # Validar sintaxis + simular instalación (sin efectos)
 ```
 
 ### Qué hace `install.sh`
 
-1. Verifica que el sistema sea Arch Linux
+1. Verifica que el sistema sea Arch Linux y que no se ejecute como root
 2. Instala `yay` (AUR helper) si no está presente
-3. **Desinstala vim/gvim** si están presentes (este entorno usa neovim exclusivamente)
-4. Instala todos los paquetes desde `packages/*.txt` vía `yay`
-5. Actualiza caché de fuentes y verifica Nerd Fonts
-6. Instala Oh My Zsh y plugins externos (autosuggestions, syntax-highlighting)
-7. Prepara el entorno para LazyVim (respaldando configuración previa de nvim)
-8. Configura permisos de ejecución en scripts
-9. Aplica todos los dotfiles con GNU Stow (symlinks a `$HOME`)
-10. Configura `~/.gitconfig.local` con datos personales (interactivo)
-11. Cachea el wallpaper para betterlockscreen
-12. Cambia el shell predeterminado a Zsh
-13. Habilita servicios del sistema: Docker, NetworkManager
-14. Ejecuta verificación post-instalación
+3. Instala todos los paquetes desde `packages/*.txt` vía `yay`
+4. Actualiza caché de fuentes y verifica Nerd Fonts
+5. Instala Oh My Zsh y plugins externos (commits fijados en `install.sh`)
+6. Respalda `~/.config/nvim` solo si existe un directorio real (nunca toca data/state/cache)
+7. Configura permisos de ejecución en scripts
+8. Aplica todos los dotfiles con GNU Stow (preflight de conflictos; aborta sin cambios si hay conflicto)
+9. Configura `~/.gitconfig.local` con datos personales (interactivo)
+10. Cachea el wallpaper para betterlockscreen
+11. Cambia el shell predeterminado a Zsh
+12. Habilita servicios: Docker (grupo docker solo con confirmación), NetworkManager
+13. Ejecuta verificación post-instalación (exit 1 si falla)
+
+> **Seguridad:** Oh My Zsh y plugins zsh se clonan en commits fijados (variables
+> `*_COMMIT` al inicio de `install.sh`). Actualizarlos es deliberado: cambia el pin,
+> no ocurre en cada instalación.
 
 ### Display manager
 
@@ -128,7 +133,7 @@ O `xinit`, agregando `exec qtile start` a `~/.xinitrc` y corriendo `startx`.
 Después de ejecutar `install.sh`:
 
 1. Cierra sesión y vuelve a iniciar
-2. Selecciona **Qtile** como window manager en SDDM (o ejecuta `startx`)
+2. Selecciona **Qtile** como window manager en tu display manager (LightDM/SDDM, o ejecuta `startx`)
 3. Abre Neovim (`nvim`) para que LazyVim instale plugins automáticamente
 4. Se incluyen wallpapers de ejemplo en `~/.config/wallpapers/` (`wallpaper.jpg` se usa por defecto)
 5. Usa `lxappearance` para seleccionar el tema GTK (arc-gtk-theme + papirus-icon-theme)
@@ -166,23 +171,31 @@ EOF
 
 ## Uso manual con Stow
 
+Stow debe apuntar siempre al repo y a `$HOME` explícitamente (si el repo no está
+directamente bajo `$HOME`, el target por defecto de stow sería incorrecto):
+
 ```bash
 cd ~/dotfiles
 
 # Aplicar un módulo específico
-stow alacritty
-stow qtile
-stow zsh
+stow --dir=. --target="$HOME" qtile
 
-# Aplicar todos los módulos
-stow */
+# Re-aplicar (idempotente, simula primero ante conflictos)
+stow --dir=. --target="$HOME" -R zsh
 
 # Eliminar symlinks de un módulo
-stow -D alacritty
+stow --dir=. --target="$HOME" -D alacritty
+
+# Aplicar todos los módulos (usa la lista del installer, NO 'stow */')
+./install.sh --stow
 
 # Eliminar todos los symlinks
 ./install.sh --uninstall
 ```
+
+> `stow */` aplica también `packages/` y otros directorios que no son módulos —
+> no lo uses. `install.sh --stow` hace preflight de todos los módulos y aborta
+> sin cambios si detecta un archivo preexistente que no es symlink propio.
 
 ## Paquetes por categoría
 
@@ -336,7 +349,7 @@ dotfiles/
 
 ### Thunar — archivos auto-generados
 
-`thunar/accels.scm` y `thunar/uca.xml` son generados automáticamente por la GUI de Thunar cuando cambias atajos o acciones personalizadas. Si ves diffs inesperados en estos archivos después de usar Thunar, es comportamiento normal — Thunar regenera su formato al guardar.
+`thunar/.config/Thunar/accels.scm` y `thunar/.config/Thunar/uca.xml` son generados automáticamente por la GUI de Thunar cuando cambias atajos o acciones personalizadas. Si ves diffs inesperados en estos archivos después de usar Thunar, es comportamiento normal — Thunar regenera su formato al guardar.
 
 ## Troubleshooting
 
