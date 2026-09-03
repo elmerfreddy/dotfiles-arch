@@ -29,8 +29,10 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export TERMINAL="alacritty"
 export BROWSER="brave"
-export LANG="es_BO.UTF-8"
-export LC_ALL="es_BO.UTF-8"
+# Locale: solo si el sistema la tiene generada (ver `locale -a`)
+if [[ -n "$(locale -a 2>/dev/null | grep -im1 '^es_BO\.utf-?8$')" ]]; then
+  export LANG="es_BO.UTF-8"
+fi
 
 # Path
 export PATH="$HOME/.local/bin:$PATH"
@@ -42,6 +44,7 @@ HISTFILE=~/.zsh_history
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_NO_DUPS
+setopt HIST_IGNORE_SPACE    # Comandos con espacio inicial no se guardan (secretos)
 setopt SHARE_HISTORY  # Comparte historial entre sesiones (implica INC_APPEND)
 
 # --- Opciones de Zsh ---
@@ -86,4 +89,7 @@ export JAVA_HOME="/usr/lib/jvm/java-17-openjdk"
 export PATH="$JAVA_HOME/bin:$PATH"
 
 
-eval "$(/home/em/.local/bin/mise activate zsh)" # added by https://mise.run/zsh
+# mise: activar solo si existe (PATH puede variar por equipo)
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+fi

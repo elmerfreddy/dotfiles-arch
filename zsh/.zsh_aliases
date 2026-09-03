@@ -84,7 +84,7 @@ alias myip="curl -s https://ifconfig.me"
 alias weather="curl -s wttr.in"
 
 # --- fzf helpers ---
-# Buscar archivo y abrir con nvim
-alias vf='nvim $(fzf)'
+# Buscar archivo y abrir con nvim (función: soporta espacios en nombres)
+vf() { local f; f="$(fzf)" && nvim "$f"; }
 # Buscar en historial
 alias fh='history | fzf'
