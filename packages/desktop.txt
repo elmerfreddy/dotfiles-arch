@@ -62,6 +62,7 @@ libnotify
 pipewire
 pipewire-pulse
 pavucontrol
+alsa-utils  # amixer: backend del widget Volume de la barra qtile
 
 # --- Utilidades del sistema ---
 network-manager-applet
