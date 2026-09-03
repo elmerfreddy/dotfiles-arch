@@ -2,8 +2,6 @@
 # Qtile - Keybindings
 # ============================================
 
-import os
-
 from libqtile.config import Key
 from libqtile.lazy import lazy
 
@@ -65,7 +63,7 @@ keys = [
     Key([mod, "shift"], "x", lazy.spawn("betterlockscreen -l"), desc="Bloquear pantalla"),
 
     # ---- Screenshots ----
-    Key([], "Print", lazy.spawn("flameshot full -p " + os.path.expanduser("~/Pictures/")), desc="Screenshot completo"),
+    Key([], "Print", lazy.spawn("sh -c 'mkdir -p \"$HOME/Pictures\" && flameshot full -p \"$HOME/Pictures/\"'"), desc="Screenshot completo"),
     Key([mod, "shift"], "s", lazy.spawn("flameshot gui"), desc="Screenshot con seleccion (como Win+Shift+S)"),
 
     # ---- Audio ----
