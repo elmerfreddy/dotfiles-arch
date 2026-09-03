@@ -1,0 +1,4 @@
+# Ignorados al stow el módulo qtile (stow lee este archivo POR módulo)
+__pycache__
+\.pyc$
+\.pyo$
