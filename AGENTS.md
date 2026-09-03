@@ -1,18 +1,20 @@
 # AGENTS.md — dotfiles
 
-Arch Linux + Qtile dotfiles managed with GNU Stow. No build system, no tests, no linter. The only executable source of truth is `install.sh`.
+Arch Linux + Qtile dotfiles managed with GNU Stow. No test framework, no linter — `make check` (syntax + full dry-run simulation) is the runnable verification. The only executable source of truth is `install.sh`.
 
 ## Core commands
 
 ```bash
 ./install.sh                          # Full install
+./install.sh --dry-run                # Simulate FULL install (no side effects)
 ./install.sh --dry-run --packages     # Simulate package install (safe to run anytime)
 ./install.sh --packages               # Install all packages (reads packages/*.txt)
 ./install.sh --packages --only base,desktop  # Selective install
 ./install.sh --stow                   # Apply symlinks only
-./install.sh --verify                 # Post-install health check
+./install.sh --verify                 # Post-install health check (exit 1 on failure)
 ./install.sh --uninstall              # Remove all stow symlinks
 
+make check                            # bash/zsh syntax + dry-run simulation
 make help                             # List all make targets
 ```
 
@@ -32,7 +34,7 @@ Comments (`#`) and blank lines are stripped by the parser. Inline comments allow
 
 ## Stow modules
 
-Managed modules (hardcoded in `install.sh:49`):
+Managed modules (hardcoded in `install.sh:86`):
 
 ```
 alacritty  bat  btop  dunst  fontconfig  git  nvim  picom
@@ -41,7 +43,7 @@ qtile  redshift  rofi  thunar  tmux  wallpapers  zsh
 
 Each module mirrors `$HOME` structure: `<module>/.config/<app>/` → `~/.config/<app>/`. Exception: `git/` and `zsh/` place dotfiles directly in `$HOME`.
 
-`stow` re-applies as delete-then-create (`stow -D` then `stow`). Idempotent.
+`install.sh --stow` preflights every module with `stow -R --no` and aborts without changes on conflict, then re-applies as restow (`-R`). Idempotent when no unmanaged files block the target paths. Stow always runs with explicit `--dir="$DOTFILES_DIR" --target="$HOME"` — never rely on the default target (parent of repo).
 
 ## Thunar config quirk
 
