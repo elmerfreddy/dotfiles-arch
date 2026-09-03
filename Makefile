@@ -2,7 +2,7 @@
 # Dotfiles - Makefile
 # ==============================================
 
-.PHONY: help install packages stow unstow fonts shell services verify clean
+.PHONY: help install packages packages-base packages-desktop packages-dev packages-fonts stow unstow fonts shell services verify dry-run update clean check
 
 help: ## Mostrar esta ayuda
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \
@@ -49,5 +49,12 @@ dry-run: ## Simular instalación completa
 
 update: ## Actualizar paquetes y re-aplicar stow
 	@./install.sh --packages --stow --fonts
+
+check: ## Validar sintaxis y simular instalación completa (sin efectos)
+	@bash -n install.sh
+	@zsh -n zsh/.zshrc && zsh -n zsh/.zsh_aliases
+	@./install.sh --dry-run >/dev/null
+	@./install.sh --dry-run --packages --only base >/dev/null
+	@echo "check: OK"
 
 clean: unstow ## Alias de unstow
