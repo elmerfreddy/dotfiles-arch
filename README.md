@@ -137,6 +137,7 @@ Después de ejecutar `install.sh`:
 3. Abre Neovim (`nvim`) para que LazyVim instale plugins automáticamente
 4. Se incluyen wallpapers de ejemplo en `~/.config/wallpapers/` (`wallpaper.jpg` se usa por defecto)
 5. Usa `lxappearance` para seleccionar el tema GTK (arc-gtk-theme + papirus-icon-theme)
+6. Ejecuta `gh auth login --hostname github.com --git-protocol https` para autenticar GitHub CLI, usado por Git para las credenciales HTTPS de GitHub y Gist.
 
 > **Nota:** Si instalaste via `stow` sin usar `install.sh`, ejecuta manualmente:
 > ```bash
