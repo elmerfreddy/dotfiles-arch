@@ -347,6 +347,22 @@ dotfiles/
 
 ## Notas de configuración
 
+### Zsh — `gga` y Gentleman Guardian Angel
+
+La configuración elimina el alias `gga` del plugin Git después de cargar Oh My Zsh,
+para que el nombre quede disponible para Gentleman Guardian Angel. Los demás
+aliases del plugin se conservan. Esto no instala la herramienta ni activa hooks.
+
+Después de abrir una terminal nueva, comprueba la resolución antes de inicializar:
+
+```zsh
+whence -va gga
+gga --help
+```
+
+`gga` debe resolver al ejecutable instalado, no a un alias de `git gui`. Si no se
+encuentra, comprueba que Gentleman Guardian Angel esté instalado y en `PATH`.
+
 ### Thunar — archivos auto-generados
 
 `thunar/.config/Thunar/accels.scm` y `thunar/.config/Thunar/uca.xml` son generados automáticamente por la GUI de Thunar cuando cambias atajos o acciones personalizadas. Si ves diffs inesperados en estos archivos después de usar Thunar, es comportamiento normal — Thunar regenera su formato al guardar.
