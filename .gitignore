@@ -22,3 +22,8 @@ __pycache__/
 
 # Salidas generadas (auditorías de grafos, metadatos con rutas locales)
 graphify-out/
+# Local Pi runtime state
+.atl/
+
+# Local CodeGraph index and runtime state
+/.codegraph/

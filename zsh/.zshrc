@@ -24,6 +24,9 @@ plugins=(
 
 source "$ZSH/oh-my-zsh.sh"
 
+# Keep gga available for Gentleman Guardian Angel.
+unalias gga 2>/dev/null || true
+
 # --- Variables de entorno ---
 export EDITOR="nvim"
 export VISUAL="nvim"

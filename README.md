@@ -137,6 +137,7 @@ Después de ejecutar `install.sh`:
 3. Abre Neovim (`nvim`) para que LazyVim instale plugins automáticamente
 4. Se incluyen wallpapers de ejemplo en `~/.config/wallpapers/` (`wallpaper.jpg` se usa por defecto)
 5. Usa `lxappearance` para seleccionar el tema GTK (arc-gtk-theme + papirus-icon-theme)
+6. Ejecuta `gh auth login --hostname github.com --git-protocol https` para autenticar GitHub CLI, usado por Git para las credenciales HTTPS de GitHub y Gist.
 
 > **Nota:** Si instalaste via `stow` sin usar `install.sh`, ejecuta manualmente:
 > ```bash
@@ -346,6 +347,22 @@ dotfiles/
 ```
 
 ## Notas de configuración
+
+### Zsh — `gga` y Gentleman Guardian Angel
+
+La configuración elimina el alias `gga` del plugin Git después de cargar Oh My Zsh,
+para que el nombre quede disponible para Gentleman Guardian Angel. Los demás
+aliases del plugin se conservan. Esto no instala la herramienta ni activa hooks.
+
+Después de abrir una terminal nueva, comprueba la resolución antes de inicializar:
+
+```zsh
+whence -va gga
+gga --help
+```
+
+`gga` debe resolver al ejecutable instalado, no a un alias de `git gui`. Si no se
+encuentra, comprueba que Gentleman Guardian Angel esté instalado y en `PATH`.
 
 ### Thunar — archivos auto-generados
 
