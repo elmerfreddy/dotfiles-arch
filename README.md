@@ -364,6 +364,19 @@ gga --help
 `gga` debe resolver al ejecutable instalado, no a un alias de `git gui`. Si no se
 encuentra, comprueba que Gentleman Guardian Angel esté instalado y en `PATH`.
 
+### Zsh — `~/.zshrc` en conflicto
+
+`install.sh --stow` enlaza `~/.zshrc` con el del repo. Si tu `~/.zshrc` es un
+archivo real (no un symlink), Stow aborta sin tocar nada. Muévelo a un backup y
+reintenta:
+
+```bash
+mv ~/.zshrc ~/.zshrc.bak && ./install.sh --stow
+```
+
+`make check` y `./install.sh --dry-run`Avisan del mismo conflicto antes de
+cambiar nada.
+
 ### Thunar — archivos auto-generados
 
 `thunar/.config/Thunar/accels.scm` y `thunar/.config/Thunar/uca.xml` son generados automáticamente por la GUI de Thunar cuando cambias atajos o acciones personalizadas. Si ves diffs inesperados en estos archivos después de usar Thunar, es comportamiento normal — Thunar regenera su formato al guardar.

@@ -256,16 +256,6 @@ prepare_nvim_target() {
     success "Entorno preparado para stow de nvim."
 }
 
-# Respaldar SOLO un ~/.zshrc real (conflicto con stow).
-prepare_zsh_target() {
-    local zshrc="$HOME/.zshrc"
-    if [ -f "$zshrc" ] && [ ! -L "$zshrc" ]; then
-        warn "Existe ~/.zshrc real (no symlink). Respaldando..."
-        run mv "$zshrc" "${zshrc}.bak.$(date +%s%N)"
-    fi
-    success "Entorno preparado para stow de zsh."
-}
-
 install_fonts() {
     info "Actualizando caché de fuentes..."
     run fc-cache -f >/dev/null 2>&1
@@ -308,22 +298,27 @@ apply_stow() {
     done
     [ "$missing" -eq 1 ] && { error "Faltan módulos; revisa STOW_MODULES."; return 1; }
 
-    if ! $DRY_RUN; then
-        local conflicts=0
-        for module in "${STOW_MODULES[@]}"; do
-            local sim
-            if ! sim="$(stow "${STOW_OPTS[@]}" --no -R "$module" 2>&1)"; then
-                error "Conflicto Stow en módulo '$module':"
-                echo "$sim" | grep -E '^\s+\*|WARNING' | sed 's/^/    /'
-                conflicts=1
-            fi
-        done
-        if [ "$conflicts" -eq 1 ]; then
-            error "Stow abortado SIN cambios. Causa típica: archivo/directorio real"
-            error "preexistente en \$HOME donde el módulo quiere enlazar."
-            error "Resuelve moviendo tu archivo a un backup y reintenta, o elimina el symlink manual."
-            return 1
+    # El preflight corre SIEMPRE, también en dry-run: `stow --no` no escribe nada.
+    # En dry-run el backup de nvim no se aplica, así que se ignora ese módulo:
+    # en el install real el backup deja el directorio limpio y no hay conflicto.
+    local ignore=()
+    if $DRY_RUN; then
+        ignore=(--ignore='nvim')
+    fi
+    local conflicts=0
+    for module in "${STOW_MODULES[@]}"; do
+        local sim
+        if ! sim="$(stow "${STOW_OPTS[@]}" --no -R "$module" "${ignore[@]}" 2>&1)"; then
+            error "Conflicto Stow en módulo '$module':"
+            echo "$sim" | grep -E '^\s+\*|WARNING' | sed 's/^/    /'
+            conflicts=1
         fi
+    done
+    if [ "$conflicts" -eq 1 ]; then
+        error "Stow abortado SIN cambios. Causa típica: archivo/directorio real"
+        error "preexistente en \$HOME donde el módulo quiere enlazar."
+        error "Resuelve moviendo tu archivo a un backup y reintenta, o elimina el symlink manual."
+        return 1
     fi
 
     for module in "${STOW_MODULES[@]}"; do
@@ -354,6 +349,7 @@ remove_stow() {
         return 1
     fi
     success "Todos los symlinks removidos."
+    warn "Si habías movido ~/.zshrc a un backup, restáuralo a mano."
 }
 
 set_zsh_shell() {
@@ -596,7 +592,6 @@ full_install() {
     install_fonts
     install_ohmyzsh
     prepare_nvim_target
-    prepare_zsh_target
     set_permissions
     create_stow_dirs
     apply_stow
@@ -742,7 +737,6 @@ main() {
 
     if $do_stow; then
         prepare_nvim_target
-        prepare_zsh_target
         set_permissions
         create_stow_dirs
         apply_stow
