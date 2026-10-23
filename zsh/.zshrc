@@ -98,7 +98,7 @@ if command -v mise >/dev/null 2>&1; then
 fi
 
 # pnpm
-export PNPM_HOME='/home/em/.local/share/pnpm'
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME/bin:"*) ;;
   *) export PATH="$PNPM_HOME/bin:$PATH" ;;
