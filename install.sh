@@ -298,22 +298,27 @@ apply_stow() {
     done
     [ "$missing" -eq 1 ] && { error "Faltan módulos; revisa STOW_MODULES."; return 1; }
 
-    if ! $DRY_RUN; then
-        local conflicts=0
-        for module in "${STOW_MODULES[@]}"; do
-            local sim
-            if ! sim="$(stow "${STOW_OPTS[@]}" --no -R "$module" 2>&1)"; then
-                error "Conflicto Stow en módulo '$module':"
-                echo "$sim" | grep -E '^\s+\*|WARNING' | sed 's/^/    /'
-                conflicts=1
-            fi
-        done
-        if [ "$conflicts" -eq 1 ]; then
-            error "Stow abortado SIN cambios. Causa típica: archivo/directorio real"
-            error "preexistente en \$HOME donde el módulo quiere enlazar."
-            error "Resuelve moviendo tu archivo a un backup y reintenta, o elimina el symlink manual."
-            return 1
+    # El preflight corre SIEMPRE, también en dry-run: `stow --no` no escribe nada.
+    # En dry-run el backup de nvim no se aplica, así que se ignora ese módulo:
+    # en el install real el backup deja el directorio limpio y no hay conflicto.
+    local ignore=()
+    if $DRY_RUN; then
+        ignore=(--ignore='nvim')
+    fi
+    local conflicts=0
+    for module in "${STOW_MODULES[@]}"; do
+        local sim
+        if ! sim="$(stow "${STOW_OPTS[@]}" --no -R "$module" "${ignore[@]}" 2>&1)"; then
+            error "Conflicto Stow en módulo '$module':"
+            echo "$sim" | grep -E '^\s+\*|WARNING' | sed 's/^/    /'
+            conflicts=1
         fi
+    done
+    if [ "$conflicts" -eq 1 ]; then
+        error "Stow abortado SIN cambios. Causa típica: archivo/directorio real"
+        error "preexistente en \$HOME donde el módulo quiere enlazar."
+        error "Resuelve moviendo tu archivo a un backup y reintenta, o elimina el symlink manual."
+        return 1
     fi
 
     for module in "${STOW_MODULES[@]}"; do
