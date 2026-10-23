@@ -261,7 +261,7 @@ prepare_zsh_target() {
     local zshrc="$HOME/.zshrc"
     if [ -f "$zshrc" ] && [ ! -L "$zshrc" ]; then
         warn "Existe ~/.zshrc real (no symlink). Respaldando..."
-        run mv "$zshrc" "${zshrc}.bak.$(date +%s)"
+        run mv "$zshrc" "${zshrc}.bak.$(date +%s%N)"
     fi
     success "Entorno preparado para stow de zsh."
 }
