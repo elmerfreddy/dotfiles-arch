@@ -256,16 +256,6 @@ prepare_nvim_target() {
     success "Entorno preparado para stow de nvim."
 }
 
-# Respaldar SOLO un ~/.zshrc real (conflicto con stow).
-prepare_zsh_target() {
-    local zshrc="$HOME/.zshrc"
-    if [ -f "$zshrc" ] && [ ! -L "$zshrc" ]; then
-        warn "Existe ~/.zshrc real (no symlink). Respaldando..."
-        run mv "$zshrc" "${zshrc}.bak.$(date +%s%N)"
-    fi
-    success "Entorno preparado para stow de zsh."
-}
-
 install_fonts() {
     info "Actualizando caché de fuentes..."
     run fc-cache -f >/dev/null 2>&1
@@ -354,6 +344,7 @@ remove_stow() {
         return 1
     fi
     success "Todos los symlinks removidos."
+    warn "Si habías movido ~/.zshrc a un backup, restáuralo a mano."
 }
 
 set_zsh_shell() {
@@ -596,7 +587,6 @@ full_install() {
     install_fonts
     install_ohmyzsh
     prepare_nvim_target
-    prepare_zsh_target
     set_permissions
     create_stow_dirs
     apply_stow
@@ -742,7 +732,6 @@ main() {
 
     if $do_stow; then
         prepare_nvim_target
-        prepare_zsh_target
         set_permissions
         create_stow_dirs
         apply_stow
