@@ -38,7 +38,7 @@ if [[ -n "$(locale -a 2>/dev/null | grep -im1 '^es_BO\.utf-?8$')" ]]; then
 fi
 
 # Path
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/go/bin:$PATH"
 
 # --- Historial ---
 HISTSIZE=10000
@@ -96,3 +96,11 @@ export PATH="$JAVA_HOME/bin:$PATH"
 if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate zsh)"
 fi
+
+# pnpm
+export PNPM_HOME='/home/em/.local/share/pnpm'
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
