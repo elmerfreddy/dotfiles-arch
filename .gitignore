@@ -20,6 +20,9 @@ __pycache__/
 # Claude agent
 .claude/
 
+# Config local de GGA (proveedor y patrones por máquina)
+.gga
+
 # Salidas generadas (auditorías de grafos, metadatos con rutas locales)
 graphify-out/
 # Local Pi runtime state
